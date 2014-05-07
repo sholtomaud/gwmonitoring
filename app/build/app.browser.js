@@ -38,20 +38,131 @@ module.exports = function(app){
         behaviours = app.behaviours;
 
     function createDataEntryForm(){
+        var formPage          = new views.Form(),
+            formTitle          = new views.Container(),
+            formTemplate          = new views.Container(),
+            pageTitle               = new views.Label(), 
+            jobName               = new views.Textbox(), 
+            jobNameLabel               = new views.Label(), 
+            jobNumber             = new views.Textbox(),	
+            jobNumberLabel             = new views.Label(),	
+            basin                 = new views.Textbox(), 
+            basinLabel                 = new views.Label(), 
+            wellField             = new views.Textbox(),	
+            wellFieldLabel             = new views.Label(),	
+            recordedBy            = new views.Textbox(),	
+            recordedByLabel            = new views.Label(),	
+            date                  = new views.Textbox(), 
+            dateLabel                  = new views.Label(), 
+            time                  = new views.Textbox(), 
+            timeLabel                  = new views.Label(), 
+            freeGasReadingMethane = new views.Textbox(), 
+            freeGasReadingMethaneLabel = new views.Label(), 
+            wellNumber            = new views.Textbox(), 
+            wellNumberLabel            = new views.Label(), 
+            wellType              = new views.Textbox(), 
+            wellTypeLabel              = new views.Label(), 
+            wellMaterial          = new views.Textbox(),
+            wellMaterialLabel          = new views.Label(),
+            saveRecord            = new actions.Set(),
+            submitButton          = new views.Button();
+         
+        
+        pageTitle.classes.value = 'subHead';
+        pageTitle.text.value = 'Ground Water Monitoring Field Form';
+        
+        jobName.classes.value = 'input';
+        jobNumber.classes.value = 'input';            
+        basin.classes.value = 'input';                
+        wellField.classes.value = 'input';
+        recordedBy.classes.value = 'input';
+        date.classes.value = 'input';
+        time.classes.value = 'input';
+        freeGasReadingMethane.classes.value = 'input';
+        wellNumber.classes.value = 'input';
+        wellType.classes.value = 'input';
+        wellMaterial.classes.value = 'input'; 
+        
+        jobNameLabel.classes.value = 'fldname';            
+        jobNumberLabel.classes.value = 'fldname';            
+        basinLabel.classes.value = 'fldname';                
+        wellFieldLabel.classes.value = 'fldname';
+        recordedByLabel.classes.value = 'fldname';
+        dateLabel.classes.value = 'fldname';
+        timeLabel.classes.value = 'fldname';
+        freeGasReadingMethaneLabel.classes.value = 'fldname';
+        wellNumberLabel.classes.value = 'fldname';
+        wellTypeLabel.classes.value = 'fldname';
+        wellMaterialLabel.classes.value = 'fldname'; 
+
+        jobNameLabel.text.value = 'Job Name';
+        jobNumberLabel.text.value = 'Job Number';            
+        basinLabel.text.value = 'Basin';                
+        wellFieldLabel.text.value = 'Well Field';
+        recordedByLabel.text.value = 'Recorded By';
+        dateLabel.text.value = 'Date';
+        timeLabel.text.value = 'Time';
+        freeGasReadingMethaneLabel.text.value = 'Free Gas Reading (Methane)';
+        wellNumberLabel.text.value = 'Well No.';
+        wellTypeLabel.text.value = 'Well Type';
+        wellMaterialLabel.text.value = 'Well Material'; 
+
+         
+        formTemplate.views.content.add([
+          jobNameLabel,
+          jobName,
+          jobNumberLabel,
+          jobNumber,            
+          basinLabel,
+          basin,                
+          wellFieldLabel,
+          wellField,
+          recordedByLabel,
+          recordedBy,
+          dateLabel,
+          date,
+          timeLabel,
+          time,
+          freeGasReadingMethaneLabel,
+          freeGasReadingMethane,
+          wellNumberLabel,
+          wellNumber,
+          wellTypeLabel,
+          wellType,
+          wellMaterialLabel,
+          wellMaterial
+        ]);
+        
+        //formTemplate.classes.value = 'controls';
+        
+        saveRecord.source.binding = '(object "record" (? (filter [] {fields fields.value}) (filter [/ui] {fields fields.table_field}) ) )';
+        saveRecord.target.binding = '[/data]';
+
+        //cancelButton.actions.click = [disableForm];
+        submitButton.text.value = 'Save';
+        submitButton.actions.click = [saveRecord];
+        
+        
+        formTemplate.classes.value = 'form';
+        formPage.views.content.add([
+          pageTitle,
+          formTemplate,
+          submitButton
+        ])
+        
+        
+        return formPage;
+    }
+    
+    function oldJSONbased_createDataEntryForm(){
         var selectedForm = new views.Frame();
         //selectedForm.url.value = 'github/chforms/app/build/pages/form1.json';
-        
         //selectedForm.url.value = 'build/pages/form1.json';
         selectedForm.url.value = 'build/pages/aquifer.json';
-
         /*
-
             the Frame view loads a chunk of UI based on its url.
-
             Change this to be a binding which loads the correct form.
-
         */
-
         return selectedForm;
     }
 
@@ -151,7 +262,7 @@ module.exports = function(app){
 
         appWrapper.views.content.add([
             //createHeader(),
-            createControls(),
+            //createControls(),
             createDataEntryForm()
         ]);
         appWrapper.classes.value = 'app'
@@ -2896,9 +3007,10 @@ Property.prototype.set = function(value, isDirty){
     var gaffa = this.gaffa;
 
     if(this.binding){
+        var setValue = this.setTransform ? gaffa.model.get(this.setTransform, this, {value: value}) : value;
         gaffa.model.set(
             this.binding,
-            this.setTransform ? gaffa.model.get(this.setTransform, this, {value: value}) : value,
+            setValue,
             this,
             isDirty
         );
@@ -2937,6 +3049,7 @@ Property.prototype.getPreviousHash = function(hash){
 };
 Property.prototype.bind = bindProperty;
 Property.prototype.debind = function(){
+    cancelAnimationFrame(this.nextUpdate);
     this.gaffa && this.gaffa.model.debind(this);
 };
 Property.prototype.getPath = function(){
@@ -3250,6 +3363,9 @@ ViewItem.prototype.toJSON = function(){
     return jsonConverter(this);
 };
 ViewItem.prototype.triggerActions = function(actionName, scope, event){
+    if(!this.gaffa){
+        return;
+    }
     this.gaffa.actions.trigger(this.actions[actionName], this, scope, event);
 };
 
@@ -6446,7 +6562,7 @@ var tokenConverters = [
             });
 
             for(var i = 0; i < sortedPaths.length; i++) {
-                result[paths.toParts(sortedPaths[i]).pop()] = source[i];
+                result[i] = sourcePathInfo.original[paths.toParts(sortedPaths[i]).pop()];
             }
 
             sourcePathInfo.setSubPaths(sortedPaths);
@@ -6497,7 +6613,7 @@ var tokenConverters = [
                         }
                     }
                 }
-            }
+            };
 
             addPaths();
 
@@ -6739,7 +6855,7 @@ var tokenConverters = [
                 var baseDate = args.next();
 
                 return new Date(baseDate.setDate(baseDate.getDate() + args.next()));
-            }
+            };
 
             return date;
         })(),
@@ -6788,7 +6904,7 @@ var tokenConverters = [
                 caller = args.callee;
 
             return function(scope, args){
-                return scope.callWith(fn, outerArgs, caller)
+                return scope.callWith(fn, outerArgs, caller);
             };
         },
         "compose": function(scope, args){
@@ -6806,7 +6922,7 @@ var tokenConverters = [
             };
         },
         "apply": function(scope, args){
-            var fn = args.next()
+            var fn = args.next(),
                 outerArgs = args.next();
 
             return scope.callWith(fn, outerArgs, args.callee);
@@ -6845,7 +6961,7 @@ Gel = function(){
     gel.lang = lang;
     gel.tokenise = function(expression){
         return gel.lang.tokenise(expression, this.tokenConverters);
-    }
+    };
     gel.evaluate = function(expression, injectedScope, returnAsTokens){
         var scope = new Scope();
 
@@ -7227,8 +7343,8 @@ Lang.Scope = Scope;
 Lang.Token = Token;
 
 module.exports = Lang;
-}).call(this,require("C:\\GitHub\\chforms\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js"))
-},{"./token":51,"C:\\GitHub\\chforms\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js":60}],51:[function(require,module,exports){
+}).call(this,require("C:\\Dev\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js"))
+},{"./token":51,"C:\\Dev\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js":60}],51:[function(require,module,exports){
 function Token(substring, length){
     this.original = substring;
     this.length = length;

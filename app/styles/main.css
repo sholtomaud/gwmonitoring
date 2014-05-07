@@ -44,10 +44,8 @@ body {
 }
 .fldname {
   padding: 1px 2px 2px;
-  background-color: linear-gradient(top, #f7f7f7, #fff);
-  border: none;
-  border-bottom: 1px dotted #bebfc2;
   text-align: right;
+  font: 12px Arial;
 }
 .postlab {
   padding: 1px 2px 2px;
@@ -58,7 +56,7 @@ body {
 }
 .field {
   padding: 1px 2px;
-  cursor: move;
+  display: inline-block;
 }
 .someotherfield {
   border: 2px solid #666;
@@ -96,11 +94,12 @@ body {
   width: 150px;
   padding: 4px;
 }
-input .key {
+.input {
   font-family: Consolas;
   border: 1px solid #a9a9a9;
   margin: 0 0 2 0;
-  editable: false;
+  editable: true;
+  display: block;
 }
 input:enabled {
   color: #000;
@@ -139,7 +138,7 @@ input:disabled {
   border: 2px;
 }
 .subHead {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
   font-family: Arial;
   margin: 4px;
