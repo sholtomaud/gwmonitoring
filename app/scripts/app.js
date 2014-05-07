@@ -24,7 +24,7 @@ window.gaffa = app.gaffa = gaffa;
 
 require('./gelExtensions')(app);
 
-gaffa.model.set(require('./model'));
+//gaffa.model.set(require('./model'));
 
 // Add the views on load.
 // This inserts them into the DOM.

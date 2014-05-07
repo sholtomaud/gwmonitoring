@@ -38,11 +38,22 @@ module.exports = function(app){
         pageTitle.text.value = 'Ground Water Monitoring Field Form';
         
         jobName.classes.value = 'input';
+        
         jobNumber.classes.value = 'input';            
+        
         basin.classes.value = 'input';                
+        
+
         wellField.classes.value = 'input';
+        wellField.size.value = 25;
+        
+
         recordedBy.classes.value = 'input';
+        recordedBy.size.value = 25;
+        
         date.classes.value = 'input';
+        date.type.value = 'date';
+
         time.classes.value = 'input';
         freeGasReadingMethane.classes.value = 'input';
         wellNumber.classes.value = 'input';
@@ -101,23 +112,41 @@ module.exports = function(app){
         
         //formTemplate.classes.value = 'controls';
         
-        saveRecord.source.binding = '(object "record" (? (filter [] {fields fields.value}) (filter [/ui] {fields fields.table_field}) ) )';
+        saveRecord.source.binding = 'formTemplate';
         saveRecord.target.binding = '[/data]';
 
         //cancelButton.actions.click = [disableForm];
-        submitButton.text.value = 'Save';
-        submitButton.actions.click = [saveRecord];
+        //submitButton.text.value = 'Save';
+        //submitButton.actions.click = [saveRecord];
         
-        
+
+/*        
         formTemplate.classes.value = 'form';
         formPage.views.content.add([
           pageTitle,
           formTemplate,
           submitButton
         ])
+*/        
         
-        
-        return formPage;
+         var pushNewUser = new actions.Push();
+        pushNewUser.source.binding = 'formTemplate'; //data is in scope from ajax action success
+        pushNewUser.target.binding = '[/data]';
+
+        var submitButton = new views.Button();
+        submitButton.text.value = 'Submit';
+        submitButton.actions.click = [saveRecord];
+
+        var form = new views.Form();
+        //form.path = '[/newUser]';
+        form.views.content.add([
+            formTemplate,
+            submitButton
+        ]);
+        form.actions.submit = [data];
+
+        return form;
+
     }
     
     function oldJSONbased_createDataEntryForm(){

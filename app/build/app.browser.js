@@ -18,7 +18,7 @@ module.exports = function(gaffa){
 
     return actions;
 };
-},{"gaffa-ajax":17,"gaffa-browser-storage":19,"gaffa-clean":22,"gaffa-conditional":23,"gaffa-navigate":33,"gaffa-push":35,"gaffa-remove":36,"gaffa-set":37,"gaffa-toggle":41}],2:[function(require,module,exports){
+},{"gaffa-ajax":15,"gaffa-browser-storage":17,"gaffa-clean":20,"gaffa-conditional":21,"gaffa-navigate":31,"gaffa-push":33,"gaffa-remove":34,"gaffa-set":35,"gaffa-toggle":39}],2:[function(require,module,exports){
 module.exports = function(gaffa){
     var behaviours = {
         ModelChange : require('gaffa-model-change'),
@@ -31,7 +31,7 @@ module.exports = function(gaffa){
 
     return behaviours;
 };
-},{"gaffa-model-change":32,"gaffa-page-load":34}],3:[function(require,module,exports){
+},{"gaffa-model-change":30,"gaffa-page-load":32}],3:[function(require,module,exports){
 module.exports = function(app){
     var views = app.views,
         actions = app.actions,
@@ -72,11 +72,22 @@ module.exports = function(app){
         pageTitle.text.value = 'Ground Water Monitoring Field Form';
         
         jobName.classes.value = 'input';
+        
         jobNumber.classes.value = 'input';            
+        
         basin.classes.value = 'input';                
+        
+
         wellField.classes.value = 'input';
+        wellField.size.value = 25;
+        
+
         recordedBy.classes.value = 'input';
+        recordedBy.size.value = 25;
+        
         date.classes.value = 'input';
+        date.type.value = 'date';
+
         time.classes.value = 'input';
         freeGasReadingMethane.classes.value = 'input';
         wellNumber.classes.value = 'input';
@@ -135,23 +146,41 @@ module.exports = function(app){
         
         //formTemplate.classes.value = 'controls';
         
-        saveRecord.source.binding = '(object "record" (? (filter [] {fields fields.value}) (filter [/ui] {fields fields.table_field}) ) )';
+        saveRecord.source.binding = 'formTemplate';
         saveRecord.target.binding = '[/data]';
 
         //cancelButton.actions.click = [disableForm];
-        submitButton.text.value = 'Save';
-        submitButton.actions.click = [saveRecord];
+        //submitButton.text.value = 'Save';
+        //submitButton.actions.click = [saveRecord];
         
-        
+
+/*        
         formTemplate.classes.value = 'form';
         formPage.views.content.add([
           pageTitle,
           formTemplate,
           submitButton
         ])
+*/        
         
-        
-        return formPage;
+         var pushNewUser = new actions.Push();
+        pushNewUser.source.binding = 'formTemplate'; //data is in scope from ajax action success
+        pushNewUser.target.binding = '[/data]';
+
+        var submitButton = new views.Button();
+        submitButton.text.value = 'Submit';
+        submitButton.actions.click = [saveRecord];
+
+        var form = new views.Form();
+        //form.path = '[/newUser]';
+        form.views.content.add([
+            formTemplate,
+            submitButton
+        ]);
+        form.actions.submit = [data];
+
+        return form;
+
     }
     
     function oldJSONbased_createDataEntryForm(){
@@ -351,7 +380,7 @@ window.gaffa = app.gaffa = gaffa;
 
 require('./gelExtensions')(app);
 
-gaffa.model.set(require('./model'));
+//gaffa.model.set(require('./model'));
 
 // Add the views on load.
 // This inserts them into the DOM.
@@ -372,7 +401,7 @@ function supports_html5_storage() {
 }
 
 module.exports = app;
-},{"./actions":1,"./behaviours":2,"./controls/appWrapper":3,"./gelExtensions":7,"./model":8,"./views":10,"gaffa":42}],5:[function(require,module,exports){
+},{"./actions":1,"./behaviours":2,"./controls/appWrapper":3,"./gelExtensions":7,"./views":8,"gaffa":40}],5:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     AjaxAction = require('gaffa-ajax'),
     doc = require('doc-js'),
@@ -403,7 +432,7 @@ Field.prototype.error = new Gaffa.Property(function(view, error){
 });
 
 module.exports = Field;
-},{"crel":11,"doc-js":13,"gaffa":42,"gaffa-ajax":17,"gaffa-container":24}],6:[function(require,module,exports){
+},{"crel":9,"doc-js":11,"gaffa":40,"gaffa-ajax":15,"gaffa-container":22}],6:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     statham = require('statham');
@@ -452,7 +481,7 @@ Frame.prototype.url = new Gaffa.Property(function(view, value){
 });
 
 module.exports = Frame;
-},{"crel":11,"gaffa":42,"statham":64}],7:[function(require,module,exports){
+},{"crel":9,"gaffa":40,"statham":62}],7:[function(require,module,exports){
 var pathHelpers = require('gedi-paths');
 
 module.exports = function(app){
@@ -462,38 +491,7 @@ module.exports = function(app){
         };
     };
 };
-},{"gedi-paths":58}],8:[function(require,module,exports){
-module.exports = {
-  //site : require('./site.json')
-  ui : require('./user_interface.json'),
-  filters:[
-        {
-            label: "All",
-            filter: 'all'
-        },
-        {
-            label: "Active",
-            filter: 'active'
-        },
-        {
-            label: "Completed",
-            filter: 'completed'
-        }
-    ],
-   filter: "all",
-   fieldsEnabled: "false"
-}
-
-},{"./user_interface.json":9}],9:[function(require,module,exports){
-module.exports=[
-{"type":"text","table_field":"site_spare1","placeholder":"e.g. AES0001","label":"Tenure Holder BoreID:","field":"spare1","maxlength":"7","width":"7","required":"true"},
-{"type":"text","table_field":"site_station","placeholder":"e.g 149343","label":"DNRM Reg. No.: ","field":"station","table":"site","maxlength":"18","width":"18"},
-{"type":"text","table_field":"site_latitude","placeholder":"Latitude","label":"Latitude: ","field":"latitude","table":"site","maxlength":"12","width":"12"},
-{"type":"text","table_field":"site_longitude","placeholder":"Longitude","label":"Longitude: ","field":"longitude","table":"site","maxlength":"12","width":"12"},
-{"type":"date","table_field":"areasmt_date","label":"Date of Visit: ","field":"date","table":"areasmt","maxlength":"12","width":"12"},
-{"width":"2","maxlength":"2","pattern":null,"required":"","tab":"bore owner","table_field":"site_datum","type":"text","label":"Hello2"}
-]
-},{}],10:[function(require,module,exports){
+},{"gedi-paths":56}],8:[function(require,module,exports){
 module.exports = function(gaffa){
     var views = {
         Container : require('gaffa-container'),
@@ -519,7 +517,7 @@ module.exports = function(gaffa){
 
     return views;
 };
-},{"./gaffaExtensions/views/field":5,"./gaffaExtensions/views/frame":6,"gaffa-anchor":18,"gaffa-button":20,"gaffa-checkbox":21,"gaffa-container":24,"gaffa-form":25,"gaffa-group":26,"gaffa-heading":27,"gaffa-html":28,"gaffa-image":29,"gaffa-label":30,"gaffa-list":31,"gaffa-text":38,"gaffa-textbox":40}],11:[function(require,module,exports){
+},{"./gaffaExtensions/views/field":5,"./gaffaExtensions/views/frame":6,"gaffa-anchor":16,"gaffa-button":18,"gaffa-checkbox":19,"gaffa-container":22,"gaffa-form":23,"gaffa-group":24,"gaffa-heading":25,"gaffa-html":26,"gaffa-image":27,"gaffa-label":28,"gaffa-list":29,"gaffa-text":36,"gaffa-textbox":38}],9:[function(require,module,exports){
 //Copyright (C) 2012 Kory Nunn
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -651,7 +649,7 @@ module.exports = function(gaffa){
     return crel;
 }));
 
-},{}],12:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var doc = {
     document: typeof document !== 'undefined' ? document : null,
     setDocument: function(d){
@@ -1183,7 +1181,7 @@ doc.isVisible = isVisible;
 doc.ready = ready;
 
 module.exports = doc;
-},{"./getTarget":14,"./getTargets":15,"./isList":16}],13:[function(require,module,exports){
+},{"./getTarget":12,"./getTargets":13,"./isList":14}],11:[function(require,module,exports){
 var doc = require('./doc'),
     isList = require('./isList'),
     getTargets = require('./getTargets')(doc.document),
@@ -1247,7 +1245,7 @@ flocProto.off = function(events, target, callback){
 };
 
 module.exports = floc;
-},{"./doc":12,"./getTargets":15,"./isList":16}],14:[function(require,module,exports){
+},{"./doc":10,"./getTargets":13,"./isList":14}],12:[function(require,module,exports){
 var singleId = /^#\w+$/;
 
 module.exports = function(document){
@@ -1262,7 +1260,7 @@ module.exports = function(document){
         return target;
     };
 };
-},{}],15:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 
 var singleClass = /^\.\w+$/,
     singleId = /^#\w+$/,
@@ -1288,7 +1286,7 @@ module.exports = function(document){
         return target;
     };
 };
-},{}],16:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports = function isList(object){
     return object !== window && (
         object instanceof Array ||
@@ -1298,7 +1296,7 @@ module.exports = function isList(object){
     );
 }
 
-},{}],17:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "ajax";
 
@@ -1415,7 +1413,7 @@ Ajax.prototype.headers = new Gaffa.Property();
 Ajax.prototype.url = new Gaffa.Property();
 
 module.exports = Ajax;
-},{"gaffa":42}],18:[function(require,module,exports){
+},{"gaffa":40}],16:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -1480,7 +1478,7 @@ Anchor.prototype.href = new Gaffa.Property(function(viewModel, value){
 });
 
 module.exports = Anchor;
-},{"crel":11,"gaffa":42}],19:[function(require,module,exports){
+},{"crel":9,"gaffa":40}],17:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "browserStorage";
 
@@ -1528,7 +1526,7 @@ BrowserStorage.prototype.source = new Gaffa.Property();
 
 module.exports = BrowserStorage;
 
-},{"gaffa":42}],20:[function(require,module,exports){
+},{"gaffa":40}],18:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -1572,7 +1570,7 @@ Button.prototype.disabled = new Gaffa.Property(function(viewModel, value){
 });
 
 module.exports = Button;
-},{"crel":11,"gaffa":42}],21:[function(require,module,exports){
+},{"crel":9,"gaffa":40}],19:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -1622,7 +1620,7 @@ Checkbox.prototype.showLabel = new Gaffa.Property(function(view, value){
 });
 
 module.exports = Checkbox;
-},{"crel":11,"gaffa":42}],22:[function(require,module,exports){
+},{"crel":9,"gaffa":40}],20:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "clean";
 
@@ -1642,7 +1640,7 @@ Clean.prototype.target = new Gaffa.Property();
 Clean.prototype.triggerEvents = new Gaffa.Property();
 
 module.exports = Clean;
-},{"gaffa":42}],23:[function(require,module,exports){
+},{"gaffa":40}],21:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "conditional";
 
@@ -1663,7 +1661,7 @@ Conditional.prototype.trigger = function(parent, scope, event) {
 
 
 module.exports =  Conditional;
-},{"gaffa":42}],24:[function(require,module,exports){
+},{"gaffa":40}],22:[function(require,module,exports){
 var Gaffa = require('gaffa');
 
 function Container(){}
@@ -1677,7 +1675,7 @@ Container.prototype.render = function(){
 };
 
 module.exports = Container;
-},{"gaffa":42}],25:[function(require,module,exports){
+},{"gaffa":40}],23:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     doc = require('doc-js'),
     crel = require('crel');
@@ -1727,7 +1725,7 @@ Form.prototype.method = new Gaffa.Property({
 Form.prototype.valid = new Gaffa.Property();
 
 module.exports = Form;
-},{"crel":11,"doc-js":13,"gaffa":42}],26:[function(require,module,exports){
+},{"crel":9,"doc-js":11,"gaffa":40}],24:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     viewType = "group";
@@ -1821,7 +1819,7 @@ Group.prototype.groups = new Gaffa.Property({
 });
 
 module.exports = Group;
-},{"crel":11,"gaffa":42}],27:[function(require,module,exports){
+},{"crel":9,"gaffa":40}],25:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -1851,7 +1849,7 @@ Heading.prototype.text = new Gaffa.Property(function(view, value){
 });
 
 module.exports = Heading;
-},{"crel":11,"gaffa":42}],28:[function(require,module,exports){
+},{"crel":9,"gaffa":40}],26:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -1876,7 +1874,7 @@ Html.prototype.html = new Gaffa.Property(function(viewModel, value){
 });
 
 module.exports = Html;
-},{"crel":11,"gaffa":42}],29:[function(require,module,exports){
+},{"crel":9,"gaffa":40}],27:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
 	cachedElement;
@@ -1915,7 +1913,7 @@ Image.prototype.image = new Gaffa.Property(function (viewModel, value) {
 });
 
 module.exports = Image;
-},{"crel":11,"gaffa":42}],30:[function(require,module,exports){
+},{"crel":9,"gaffa":40}],28:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -1953,7 +1951,7 @@ Label.prototype.labelFor = new Gaffa.Property(function (viewModel, value) {
 });
 
 module.exports = Label;
-},{"crel":11,"gaffa":42}],31:[function(require,module,exports){
+},{"crel":9,"gaffa":40}],29:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     TemplaterProperty = require('gaffa/templaterProperty');
@@ -1980,7 +1978,7 @@ List.prototype.list = new TemplaterProperty({
 });
 
 module.exports = List;
-},{"crel":11,"gaffa":42,"gaffa/templaterProperty":56}],32:[function(require,module,exports){
+},{"crel":9,"gaffa":40,"gaffa/templaterProperty":54}],30:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     behaviourType = 'modelChange';
 
@@ -2029,7 +2027,7 @@ ModelChangeBehaviour.prototype.watch = new Gaffa.Property({
 });
 
 module.exports = ModelChangeBehaviour;
-},{"gaffa":42}],33:[function(require,module,exports){
+},{"gaffa":40}],31:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "navigate";
 
@@ -2051,7 +2049,7 @@ Navigate.prototype.trigger = function() {
 }
 
 module.exports = Navigate;
-},{"gaffa":42}],34:[function(require,module,exports){
+},{"gaffa":40}],32:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     behaviourType = 'pageLoad';
 
@@ -2064,7 +2062,7 @@ PageLoadBehaviour.prototype.bind = function(){
 };
 
 module.exports = PageLoadBehaviour;
-},{"gaffa":42}],35:[function(require,module,exports){
+},{"gaffa":40}],33:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "push";
 
@@ -2099,7 +2097,7 @@ Push.prototype.clone = new Gaffa.Property({
 
 
 module.exports = Push;
-},{"gaffa":42}],36:[function(require,module,exports){
+},{"gaffa":40}],34:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "remove";
 
@@ -2116,7 +2114,7 @@ Remove.prototype.cleans = new Gaffa.Property();
 
 
 module.exports = Remove;
-},{"gaffa":42}],37:[function(require,module,exports){
+},{"gaffa":40}],35:[function(require,module,exports){
 var Gaffa = require('gaffa');
 
 function Set(){}
@@ -2140,7 +2138,7 @@ Set.prototype.cleans = new Gaffa.Property({
 });
 
 module.exports = Set;
-},{"gaffa":42}],38:[function(require,module,exports){
+},{"gaffa":40}],36:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     viewType = "text";
@@ -2167,7 +2165,7 @@ Text.prototype.enabled = undefined;
 Text.prototype.classes = undefined;
 
 module.exports = Text;
-},{"crel":11,"gaffa":42}],39:[function(require,module,exports){
+},{"crel":9,"gaffa":40}],37:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     doc = require('doc-js');
@@ -2255,7 +2253,7 @@ FormElement.prototype.validity = new Gaffa.Property(function(view, value){
 });
 
 module.exports = FormElement;
-},{"crel":11,"doc-js":13,"gaffa":42}],40:[function(require,module,exports){
+},{"crel":9,"doc-js":11,"gaffa":40}],38:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     FormElement = require('gaffa-formelement');
 
@@ -2275,8 +2273,16 @@ Textbox.prototype.maxLength = new Gaffa.Property(function(view, value){
     }
 });
 
+Textbox.prototype.size = new Gaffa.Property(function(view, value){
+    if(value != null){
+        view.formElement.setAttribute('size', value);
+    }else{
+        view.formElement.removeAttribute('size');
+    }
+});
+
 module.exports = Textbox;
-},{"gaffa":42,"gaffa-formelement":39}],41:[function(require,module,exports){
+},{"gaffa":40,"gaffa-formelement":37}],39:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "toggle";
 
@@ -2290,7 +2296,7 @@ Toggle.prototype.trigger = function(){
 Toggle.prototype.target = new Gaffa.Property();
 
 module.exports = Toggle;
-},{"gaffa":42}],42:[function(require,module,exports){
+},{"gaffa":40}],40:[function(require,module,exports){
 //Copyright (C) 2012 Kory Nunn, Matt Ginty & Maurice Butler
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -4381,7 +4387,7 @@ module.exports = Gaffa;
 
 ///[license.md]
 
-},{"./raf.js":55,"crel":43,"deep-equal":44,"doc-js":13,"events":59,"fasteach":45,"gedi":47,"spec-js":54}],43:[function(require,module,exports){
+},{"./raf.js":53,"crel":41,"deep-equal":42,"doc-js":11,"events":57,"fasteach":43,"gedi":45,"spec-js":52}],41:[function(require,module,exports){
 //Copyright (C) 2012 Kory Nunn
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -4503,7 +4509,7 @@ module.exports = Gaffa;
     return crel;
 }));
 
-},{}],44:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var Object_keys = typeof Object.keys === 'function'
     ? Object.keys
@@ -4589,14 +4595,14 @@ function objEquiv(a, b) {
   return true;
 }
 
-},{}],45:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 function fastEach(items, callback) {
     for (var i = 0; i < items.length && !callback(items[i], i, items);i++) {}
     return items;
 }
 
 module.exports = fastEach;
-},{}],46:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 var WM = typeof WM !== 'undefined' ? WeakMap : require('weak-map'),
     paths = require('gedi-paths'),
     pathConstants = paths.constants
@@ -4998,7 +5004,7 @@ module.exports = function(modelGet, gel, PathToken){
         removeModelReference: removeModelReference
     };
 };
-},{"./modelOperations":48,"gedi-paths":58,"weak-map":52}],47:[function(require,module,exports){
+},{"./modelOperations":46,"gedi-paths":56,"weak-map":50}],45:[function(require,module,exports){
 //Copyright (C) 2012 Kory Nunn
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -5613,7 +5619,7 @@ function newGedi(model) {
 }
 
 module.exports = gediConstructor;
-},{"./events":46,"./modelOperations":48,"./pathToken":53,"gedi-paths":58,"gel-js":49,"spec-js":54}],48:[function(require,module,exports){
+},{"./events":44,"./modelOperations":46,"./pathToken":51,"gedi-paths":56,"gel-js":47,"spec-js":52}],46:[function(require,module,exports){
 var paths = require('gedi-paths'),
     memoiseCache = {};
 
@@ -5743,7 +5749,7 @@ module.exports = {
     get: get,
     set: set
 };
-},{"gedi-paths":58}],49:[function(require,module,exports){
+},{"gedi-paths":56}],47:[function(require,module,exports){
 var Lang = require('lang-js'),
     paths = require('gedi-paths'),
     createNestingParser = Lang.createNestingParser,
@@ -6978,7 +6984,7 @@ Gel = function(){
 Gel.Token = Token;
 Gel.Scope = Scope;
 module.exports = Gel;
-},{"gedi-paths":58,"lang-js":50,"spec-js":54}],50:[function(require,module,exports){
+},{"gedi-paths":56,"lang-js":48,"spec-js":52}],48:[function(require,module,exports){
 (function (process){
 var Token = require('./token');
 
@@ -7343,8 +7349,8 @@ Lang.Scope = Scope;
 Lang.Token = Token;
 
 module.exports = Lang;
-}).call(this,require("C:\\Dev\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js"))
-},{"./token":51,"C:\\Dev\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js":60}],51:[function(require,module,exports){
+}).call(this,require("C:\\GitHub\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js"))
+},{"./token":49,"C:\\GitHub\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js":58}],49:[function(require,module,exports){
 function Token(substring, length){
     this.original = substring;
     this.length = length;
@@ -7356,7 +7362,7 @@ Token.prototype.valueOf = function(){
 }
 
 module.exports = Token;
-},{}],52:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 // Copyright (C) 2011 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -8034,7 +8040,7 @@ module.exports = Token;
   }
 })();
 
-},{}],53:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 var Lang = require('lang-js'),
     Token = Lang.Token,
     paths = require('gedi-paths'),
@@ -8065,7 +8071,7 @@ module.exports = function(get, model){
 
     return PathToken;
 }
-},{"gedi-paths":58,"gedi-paths/detectPath":57,"lang-js":50,"spec-js":54}],54:[function(require,module,exports){
+},{"gedi-paths":56,"gedi-paths/detectPath":55,"lang-js":48,"spec-js":52}],52:[function(require,module,exports){
 Object.create = Object.create || function (o) {
     if (arguments.length > 1) {
         throw new Error('Object.create implementation only accepts the first parameter.');
@@ -8103,7 +8109,7 @@ function createSpec(child, parent){
 }
 
 module.exports = createSpec;
-},{}],55:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /*
  * raf.js
  * https://github.com/ngryman/raf.js
@@ -8156,7 +8162,7 @@ module.exports = {
     requestAnimationFrame: requestAnimationFrame,
     cancelAnimationFrame: cancelAnimationFrame
 };
-},{}],56:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     createSpec = require('spec-js');
 
@@ -8291,7 +8297,7 @@ TemplaterProperty.prototype.update =function (viewModel, value) {
 };
 
 module.exports = TemplaterProperty;
-},{"gaffa":42,"spec-js":54}],57:[function(require,module,exports){
+},{"gaffa":40,"spec-js":52}],55:[function(require,module,exports){
 module.exports = function detectPath(substring){
     if (substring.charAt(0) === '[') {
         var index = 1;
@@ -8310,7 +8316,7 @@ module.exports = function detectPath(substring){
         } while (index < substring.length);
     }
 };
-},{}],58:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 var detectPath = require('./detectPath');
 
 var pathSeparator = "/",
@@ -8580,7 +8586,7 @@ module.exports = {
         wildcard: pathWildcard
     }
 };
-},{"./detectPath":57}],59:[function(require,module,exports){
+},{"./detectPath":55}],57:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -8882,7 +8888,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],60:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -8944,7 +8950,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],61:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 function escapeHex(hex){
     return String.fromCharCode(hex);
 }
@@ -8957,7 +8963,7 @@ function createKey(number){
 }
 
 module.exports = createKey;
-},{}],62:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 var revive = require('./revive');
 
 function parse(json, reviver){
@@ -8965,7 +8971,7 @@ function parse(json, reviver){
 }
 
 module.exports = parse;
-},{"./revive":63}],63:[function(require,module,exports){
+},{"./revive":61}],61:[function(require,module,exports){
 var createKey = require('./createKey'),
     keyKey = createKey(-1);
 
@@ -9024,13 +9030,13 @@ function revive(input){
 }
 
 module.exports = revive;
-},{"./createKey":61}],64:[function(require,module,exports){
+},{"./createKey":59}],62:[function(require,module,exports){
 module.exports = {
     stringify: require('./stringify'),
     parse: require('./parse'),
     revive: require('./revive')
 };
-},{"./parse":62,"./revive":63,"./stringify":65}],65:[function(require,module,exports){
+},{"./parse":60,"./revive":61,"./stringify":63}],63:[function(require,module,exports){
 var createKey = require('./createKey'),
     keyKey = createKey(-1);
 
@@ -9086,4 +9092,4 @@ function stringify(input, replacer, spacer){
 }
 
 module.exports = stringify;
-},{"./createKey":61}]},{},[4])
+},{"./createKey":59}]},{},[4])
