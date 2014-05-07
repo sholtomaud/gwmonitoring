@@ -38,18 +38,23 @@ module.exports = function(app){
         pageTitle.text.value = 'Ground Water Monitoring Field Form';
         
         jobName.classes.value = 'input';
-        
+        jobName.value.binding = '[jobName]';
+                    
         jobNumber.classes.value = 'input';            
-        
+        jobNumber.value.binding = '[jobNumber]';
+
         basin.classes.value = 'input';                
+        basin.value.binding = '[basin]';
         
 
         wellField.classes.value = 'input';
         wellField.size.value = 25;
-        
+        wellField.value.binding = '[wellField]';
 
         recordedBy.classes.value = 'input';
-        recordedBy.size.value = 25;
+        recordedBy.size.value = 15;
+        recordedBy.value.binding = '[recordedBy]';
+
         
         date.classes.value = 'input';
         date.type.value = 'date';
@@ -109,11 +114,12 @@ module.exports = function(app){
           wellMaterialLabel,
           wellMaterial
         ]);
+        formTemplate.path = '[/form]';
         
         //formTemplate.classes.value = 'controls';
         
-        saveRecord.source.binding = 'formTemplate';
-        saveRecord.target.binding = '[/data]';
+        //saveRecord.source.binding = 'formTemplate';
+        //saveRecord.target.binding = '[/data]';
 
         //cancelButton.actions.click = [disableForm];
         //submitButton.text.value = 'Save';
@@ -128,22 +134,35 @@ module.exports = function(app){
           submitButton
         ])
 */        
-        
-         var pushNewUser = new actions.Push();
-        pushNewUser.source.binding = 'formTemplate'; //data is in scope from ajax action success
+
+        var pushNewUser = new actions.Push();
+        pushNewUser.source.binding = '[/form]'; //data is in scope from ajax action success
         pushNewUser.target.binding = '[/data]';
+        
+        //var alert = new actions.Alert();
+        //alert.text.value = 'Saved';
 
         var submitButton = new views.Button();
         submitButton.text.value = 'Submit';
-        submitButton.actions.click = [saveRecord];
+        submitButton.actions.click = [pushNewUser];
 
         var form = new views.Form();
-        //form.path = '[/newUser]';
+        form.path = '[/formData]';
         form.views.content.add([
             formTemplate,
             submitButton
         ]);
-        form.actions.submit = [data];
+        form.actions.submit = [pushNewUser];
+        
+        var clearNewUser = new actions.Remove();
+        clearNewUser.target.binding = '[]';
+
+        var saveData = new actions.Ajax();
+        //saveUser.method.value = 'POST';
+        saveData.source.binding = '[]';
+        saveData.actions.success = [pushNewUser, clearNewUser];
+            
+
 
         return form;
 
