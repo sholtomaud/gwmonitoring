@@ -87,6 +87,8 @@ module.exports = function(app){
 
         recordedBy.classes.value = 'input';
         recordedBy.size.value = 15;
+        recordedBy.required.value = 'true';
+        
         recordedBy.value.binding = '[recordedBy]';
 
         
@@ -2297,6 +2299,14 @@ Textbox.prototype.size = new Gaffa.Property(function(view, value){
         view.formElement.setAttribute('size', value);
     }else{
         view.formElement.removeAttribute('size');
+    }
+});
+
+Textbox.prototype.required = new Gaffa.Property(function(view, value){
+    if(value != null){
+        view.formElement.setAttribute('required',value);
+    }else{
+        view.formElement.removeAttribute('required');
     }
 });
 
@@ -7368,8 +7378,8 @@ Lang.Scope = Scope;
 Lang.Token = Token;
 
 module.exports = Lang;
-}).call(this,require("C:\\GitHub\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js"))
-},{"./token":49,"C:\\GitHub\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js":58}],49:[function(require,module,exports){
+}).call(this,require("C:\\Dev\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js"))
+},{"./token":49,"C:\\Dev\\gwmonitoring\\node_modules\\gulp-browserify\\node_modules\\browserify\\node_modules\\insert-module-globals\\node_modules\\process\\browser.js":58}],49:[function(require,module,exports){
 function Token(substring, length){
     this.original = substring;
     this.length = length;

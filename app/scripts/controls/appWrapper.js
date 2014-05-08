@@ -53,6 +53,8 @@ module.exports = function(app){
 
         recordedBy.classes.value = 'input';
         recordedBy.size.value = 15;
+        recordedBy.required.value = 'true';
+        
         recordedBy.value.binding = '[recordedBy]';
 
         
