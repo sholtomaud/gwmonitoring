@@ -13,6 +13,8 @@ module.exports = function(gaffa){
         Html : require('gaffa-html'),
         Textbox : require('gaffa-textbox'),
         Checkbox : require('gaffa-checkbox'),
+        Radio : require('gaffa-radio'),
+        Select : require('gaffa-select'),
         Frame : require('./gaffaExtensions/views/frame'),
         Field : require('./gaffaExtensions/views/field')
     };
