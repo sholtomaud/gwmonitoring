@@ -18,7 +18,7 @@ module.exports = function(gaffa){
 
     return actions;
 };
-},{"gaffa-ajax":15,"gaffa-browser-storage":17,"gaffa-clean":20,"gaffa-conditional":21,"gaffa-navigate":31,"gaffa-push":33,"gaffa-remove":34,"gaffa-set":35,"gaffa-toggle":39}],2:[function(require,module,exports){
+},{"gaffa-ajax":15,"gaffa-browser-storage":17,"gaffa-clean":20,"gaffa-conditional":21,"gaffa-navigate":31,"gaffa-push":33,"gaffa-remove":35,"gaffa-set":42,"gaffa-toggle":47}],2:[function(require,module,exports){
 module.exports = function(gaffa){
     var behaviours = {
         ModelChange : require('gaffa-model-change'),
@@ -55,7 +55,7 @@ var behaviours = app.behaviours;
   GroundWaterMonitoringFormLabelContainer.classes.value = 'field'
   var SiteIDLabel = new views.Label();
   var SiteIDTextbox = new views.Textbox();
-  SiteIDTextbox.value.binding = '[SITE_STATION]'
+  SiteIDTextbox.binding.value = '[SITE_STATION]'
   SiteIDTextbox.size.value = 20;
   SiteIDLabel.text.value = 'Site ID';
   SiteIDTextbox.maxLength.value = 18;
@@ -72,7 +72,7 @@ var behaviours = app.behaviours;
   SiteIDLabelContainer.classes.value = 'field'
   var JobNameLabel = new views.Label();
   var JobNameTextbox = new views.Textbox();
-  JobNameTextbox.value.binding = '[AREASMT_ASSTYPE]'
+  JobNameTextbox.binding.value = '[AREASMT_ASSTYPE]'
   JobNameTextbox.size.value = 7;
   JobNameLabel.text.value = 'Job Name';
   JobNameTextbox.maxLength.value = 5;
@@ -89,7 +89,7 @@ var behaviours = app.behaviours;
   JobNameLabelContainer.classes.value = 'field'
   var BasinLabel = new views.Label();
   var BasinSelect = new views.Select();
-  BasinSelect.value.binding = '[SITE_CATEGORY1]'
+  BasinSelect.binding.value = '[SITE_CATEGORY1]'
   BasinSelect.options.value = [''];
   BasinLabel.text.value = 'Basin';
   BasinLabel.classes.value = 'fldname';
@@ -105,7 +105,7 @@ var behaviours = app.behaviours;
   BasinLabelContainer.classes.value = 'field'
   var WellfieldLabel = new views.Label();
   var WellfieldSelect = new views.Select();
-  WellfieldSelect.value.binding = '[SITE_CATEGORY2]'
+  WellfieldSelect.binding.value = '[SITE_CATEGORY2]'
   WellfieldSelect.options.value = [''];
   WellfieldLabel.text.value = 'Wellfield';
   WellfieldLabel.classes.value = 'fldname';
@@ -121,7 +121,7 @@ var behaviours = app.behaviours;
   WellfieldLabelContainer.classes.value = 'field'
   var RecordedByLabel = new views.Label();
   var RecordedByTextbox = new views.Textbox();
-  RecordedByTextbox.value.binding = '[AREASMT_ASSOFFICER]'
+  RecordedByTextbox.binding.value = '[AREASMT_ASSOFFICER]'
   RecordedByTextbox.size.value = 17;
   RecordedByLabel.text.value = 'Recorded By';
   RecordedByTextbox.maxLength.value = 15;
@@ -139,7 +139,7 @@ var behaviours = app.behaviours;
   var DateLabel = new views.Label();
   var DateDate = new views.Textbox();
   DateDate.type.value = 'date'
-  DateDate.value.binding = '[AREASMT_DATE|HYDMEAS_DATE|PUMPTEST_TESTDATE|PUMPREAD_TESTDATE|GWTRACE/SAMPLES_DATE|GWTRACER/SAMPLES_DATE]'
+  DateDate.binding.value = '[AREASMT_DATE|HYDMEAS_DATE|PUMPTEST_TESTDATE|PUMPREAD_TESTDATE|GWTRACE/SAMPLES_DATE|GWTRACER/SAMPLES_DATE]'
   DateLabel.text.value = 'Date';
   DateLabel.classes.value = 'fldname';
 
@@ -154,7 +154,7 @@ var behaviours = app.behaviours;
   DateLabelContainer.classes.value = 'field'
   var TimeLabel = new views.Label();
   var TimeTextbox = new views.Textbox();
-  TimeTextbox.value.binding = '[STNVISIT_STARTTIME]'
+  TimeTextbox.binding.value = '[STNVISIT_STARTTIME]'
   TimeTextbox.size.value = 6;
   TimeLabel.text.value = 'Time';
   TimeTextbox.maxLength.value = 4;
@@ -176,7 +176,7 @@ var behaviours = app.behaviours;
   TimeLabelContainer.classes.value = 'field'
   var FreeGasReadingMethaneLabel = new views.Label();
   var FreeGasReadingMethaneTextbox = new views.Textbox();
-  FreeGasReadingMethaneTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 1011]'
+  FreeGasReadingMethaneTextbox.binding.value = '[RESULTS_VALUE | RESULTS_VARIABLE = 1011]'
   FreeGasReadingMethaneTextbox.size.value = 17;
   FreeGasReadingMethaneLabel.text.value = 'Free Gas Reading (Methane)';
   FreeGasReadingMethaneTextbox.maxLength.value = 15;
@@ -212,7 +212,7 @@ var behaviours = app.behaviours;
   WellTypeLabelContainer.classes.value = 'field'
   var MonitoringLabel = new views.Label();
   var MonitoringRadio = new views.Radio();
-  MonitoringRadio.value.binding = '[SITE_STNTYPE]'
+  MonitoringRadio.binding.value = '[SITE_STNTYPE]'
   MonitoringLabel.text.value = 'Monitoring';
   MonitoringLabel.classes.value = 'fldname';
 
@@ -227,7 +227,7 @@ var behaviours = app.behaviours;
   MonitoringLabelContainer.classes.value = 'field'
   var ExtractionLabel = new views.Label();
   var ExtractionRadio = new views.Radio();
-  ExtractionRadio.value.binding = '[SITE_STNTYPE]'
+  ExtractionRadio.binding.value = '[SITE_STNTYPE]'
   ExtractionLabel.text.value = 'Extraction';
   ExtractionLabel.classes.value = 'fldname';
 
@@ -242,7 +242,7 @@ var behaviours = app.behaviours;
   ExtractionLabelContainer.classes.value = 'field'
   var OtherLabel = new views.Label();
   var OtherRadio = new views.Radio();
-  OtherRadio.value.binding = '[SITE_STNTYPE]'
+  OtherRadio.binding.value = '[SITE_STNTYPE]'
   OtherLabel.text.value = 'Other';
   OtherLabel.classes.value = 'fldname';
 
@@ -271,7 +271,7 @@ var behaviours = app.behaviours;
   WellMaterialLabelContainer.classes.value = 'field'
   var PVCLabel = new views.Label();
   var PVCRadio = new views.Radio();
-  PVCRadio.value.binding = '[CASING_CASETYPE]'
+  PVCRadio.binding.value = '[CASING_CASETYPE]'
   PVCLabel.text.value = 'PVC';
   PVCLabel.classes.value = 'fldname';
 
@@ -286,7 +286,7 @@ var behaviours = app.behaviours;
   PVCLabelContainer.classes.value = 'field'
   var SteelLabel = new views.Label();
   var SteelRadio = new views.Radio();
-  SteelRadio.value.binding = '[CASING_CASETYPE]'
+  SteelRadio.binding.value = '[CASING_CASETYPE]'
   SteelLabel.text.value = 'Steel';
   SteelLabel.classes.value = 'fldname';
 
@@ -301,7 +301,7 @@ var behaviours = app.behaviours;
   SteelLabelContainer.classes.value = 'field'
   var OtherLabel = new views.Label();
   var OtherRadio = new views.Radio();
-  OtherRadio.value.binding = '[CASING_CASETYPE]'
+  OtherRadio.binding.value = '[CASING_CASETYPE]'
   OtherLabel.text.value = 'Other';
   OtherLabel.classes.value = 'fldname';
 
@@ -330,7 +330,7 @@ var behaviours = app.behaviours;
   PurgeSetupLabelContainer.classes.value = 'field'
   var WellHeadConditionLabel = new views.Label();
   var WellHeadConditionTextbox = new views.Textbox();
-  WellHeadConditionTextbox.value.binding = '[HYDRLMP_COMMENT]'
+  WellHeadConditionTextbox.binding.value = '[HYDRLMP_COMMENT]'
   WellHeadConditionTextbox.size.value = 32;
   WellHeadConditionLabel.text.value = 'Well Head Condition';
   WellHeadConditionTextbox.maxLength.value = 60;
@@ -347,7 +347,7 @@ var behaviours = app.behaviours;
   WellHeadConditionLabelContainer.classes.value = 'field'
   var WaterLevelDepthLabel = new views.Label();
   var WaterLevelDepthTextbox = new views.Textbox();
-  WaterLevelDepthTextbox.value.binding = '[HYDMEAS_VALUE | HYDMEAS_VARIABLE = 110 ]'
+  WaterLevelDepthTextbox.binding.value = '[HYDMEAS_VALUE | HYDMEAS_VARIABLE = 110 ]'
   WaterLevelDepthTextbox.size.value = 12;
   WaterLevelDepthLabel.text.value = 'Water Level Depth ';
   WaterLevelDepthTextbox.maxLength.value = 15;
@@ -369,7 +369,7 @@ var behaviours = app.behaviours;
   WaterLevelDepthLabelContainer.classes.value = 'field'
   var MeasurementPointDescriptionLabel = new views.Label();
   var MeasurementPointDescriptionTextbox = new views.Textbox();
-  MeasurementPointDescriptionTextbox.value.binding = '[HYDRLMP_MEASPTDESC  ]'
+  MeasurementPointDescriptionTextbox.binding.value = '[HYDRLMP_MEASPTDESC  ]'
   MeasurementPointDescriptionTextbox.size.value = 62;
   MeasurementPointDescriptionLabel.text.value = 'Measurement Point Description';
   MeasurementPointDescriptionTextbox.maxLength.value = 60;
@@ -386,7 +386,7 @@ var behaviours = app.behaviours;
   MeasurementPointDescriptionLabelContainer.classes.value = 'field'
   var TotalDepthofWellLabel = new views.Label();
   var TotalDepthofWellTextbox = new views.Textbox();
-  TotalDepthofWellTextbox.value.binding = '[GWHOLE_DEPTHDRILL]'
+  TotalDepthofWellTextbox.binding.value = '[GWHOLE_DEPTHDRILL]'
   TotalDepthofWellLabel.text.value = 'Total Depth of Well ';
   var TotalDepthofWellPostLabel = new views.Label();
   TotalDepthofWellPostLabel.text.value = '(TD in m BTOC)';
@@ -406,7 +406,7 @@ var behaviours = app.behaviours;
   TotalDepthofWellLabelContainer.classes.value = 'field'
   var WellDiameterLabel = new views.Label();
   var WellDiameterTextbox = new views.Textbox();
-  WellDiameterTextbox.value.binding = '[CASING_OUTDIAM|CASING_DEPTHFROM=0_00]'
+  WellDiameterTextbox.binding.value = '[CASING_OUTDIAM|CASING_DEPTHFROM=0_00]'
   WellDiameterTextbox.size.value = 17;
   WellDiameterLabel.text.value = 'Well Diameter ';
   WellDiameterTextbox.maxLength.value = 15;
@@ -442,7 +442,7 @@ var behaviours = app.behaviours;
   BailerTypeLabelContainer.classes.value = 'field'
   var PVCLabel = new views.Label();
   var PVCRadio = new views.Radio();
-  PVCRadio.value.binding = '[PUMPTTEST_COMMENTS ]'
+  PVCRadio.binding.value = '[PUMPTTEST_COMMENTS ]'
   PVCLabel.text.value = 'PVC';
   PVCLabel.classes.value = 'fldname';
 
@@ -457,7 +457,7 @@ var behaviours = app.behaviours;
   PVCLabelContainer.classes.value = 'field'
   var SteelLabel = new views.Label();
   var SteelRadio = new views.Radio();
-  SteelRadio.value.binding = '[PUMPTTEST_COMMENTS ]'
+  SteelRadio.binding.value = '[PUMPTTEST_COMMENTS ]'
   SteelLabel.text.value = 'Steel';
   SteelLabel.classes.value = 'fldname';
 
@@ -472,7 +472,7 @@ var behaviours = app.behaviours;
   SteelLabelContainer.classes.value = 'field'
   var TeflonLabel = new views.Label();
   var TeflonRadio = new views.Radio();
-  TeflonRadio.value.binding = '[PUMPTTEST_COMMENTS ]'
+  TeflonRadio.binding.value = '[PUMPTTEST_COMMENTS ]'
   TeflonLabel.text.value = 'Teflon';
   TeflonLabel.classes.value = 'fldname';
 
@@ -487,7 +487,7 @@ var behaviours = app.behaviours;
   TeflonLabelContainer.classes.value = 'field'
   var OtherLabel = new views.Label();
   var OtherRadio = new views.Radio();
-  OtherRadio.value.binding = '[PUMPTTEST_COMMENTS ]'
+  OtherRadio.binding.value = '[PUMPTTEST_COMMENTS ]'
   OtherLabel.text.value = 'Other';
   OtherLabel.classes.value = 'fldname';
 
@@ -530,7 +530,7 @@ var behaviours = app.behaviours;
   SubmersibleLabelContainer.classes.value = 'field'
   var BladderLabel = new views.Label();
   var BladderRadio = new views.Radio();
-  BladderRadio.value.binding = '[PUMPTTEST_COMMENTS]'
+  BladderRadio.binding.value = '[PUMPTTEST_COMMENTS]'
   BladderLabel.text.value = 'Bladder';
   BladderLabel.classes.value = 'fldname';
 
@@ -545,7 +545,7 @@ var behaviours = app.behaviours;
   BladderLabelContainer.classes.value = 'field'
   var OtherLabel = new views.Label();
   var OtherRadio = new views.Radio();
-  OtherRadio.value.binding = '[PUMPTTEST_COMMENTS]'
+  OtherRadio.binding.value = '[PUMPTTEST_COMMENTS]'
   OtherLabel.text.value = 'Other';
   OtherLabel.classes.value = 'fldname';
 
@@ -560,9 +560,7 @@ var behaviours = app.behaviours;
   OtherLabelContainer.classes.value = 'field'
   var NotesLabel = new views.Label();
   var NotesTextarea = new views.Textarea();
-  NotesTextarea.value.binding = '[PUMPTTEST_COMMENTS]'
-  NotesTextarea.cols.value = 50;
-  NotesTextarea.rows.value = 4;
+  NotesTextarea.binding.value = '[PUMPTTEST_COMMENTS]'
   NotesLabel.text.value = 'Notes';
   NotesLabel.classes.value = 'fldname';
 
@@ -591,7 +589,7 @@ var behaviours = app.behaviours;
   PumpIntakeSettingLabelContainer.classes.value = 'field'
   var DepthLabel = new views.Label();
   var DepthTextbox = new views.Textbox();
-  DepthTextbox.value.binding = '[PUMPTEST_PUMPDEPTH]'
+  DepthTextbox.binding.value = '[PUMPTEST_PUMPDEPTH]'
   DepthTextbox.size.value = 8;
   DepthLabel.text.value = 'Depth ';
   DepthTextbox.maxLength.value = 6;
@@ -627,7 +625,7 @@ var behaviours = app.behaviours;
   FieldParameterMeasurementsLabelContainer.classes.value = 'field'
   var TimeLabel = new views.Label();
   var TimeTextbox = new views.Textbox();
-  TimeTextbox.value.binding = '[PUMPTEST_TIME]'
+  TimeTextbox.binding.value = '[PUMPTEST_TIME]'
   TimeTextbox.size.value = 6;
   TimeLabel.text.value = 'Time';
   TimeTextbox.maxLength.value = 4;
@@ -649,7 +647,7 @@ var behaviours = app.behaviours;
   TimeLabelContainer.classes.value = 'field'
   var VolumePurgedLabel = new views.Label();
   var VolumePurgedTextbox = new views.Textbox();
-  VolumePurgedTextbox.value.binding = '[PUMPTEST_SPARE3]'
+  VolumePurgedTextbox.binding.value = '[PUMPTEST_SPARE3]'
   VolumePurgedLabel.text.value = 'Volume Purged';
   var VolumePurgedPostLabel = new views.Label();
   VolumePurgedPostLabel.text.value = '(L)';
@@ -669,7 +667,7 @@ var behaviours = app.behaviours;
   VolumePurgedLabelContainer.classes.value = 'field'
   var DOLabel = new views.Label();
   var DOTextbox = new views.Textbox();
-  DOTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
+  DOTextbox.binding.value = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
   DOTextbox.size.value = 17;
   DOLabel.text.value = 'DO ';
   DOTextbox.maxLength.value = 15;
@@ -691,7 +689,7 @@ var behaviours = app.behaviours;
   DOLabelContainer.classes.value = 'field'
   var DOppmLabel = new views.Label();
   var DOppmTextbox = new views.Textbox();
-  DOppmTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
+  DOppmTextbox.binding.value = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
   DOppmTextbox.size.value = 17;
   DOppmLabel.text.value = 'DO ppm';
   DOppmTextbox.maxLength.value = 15;
@@ -713,7 +711,7 @@ var behaviours = app.behaviours;
   DOppmLabelContainer.classes.value = 'field'
   var ElectricalCondutivitiyLabel = new views.Label();
   var ElectricalCondutivitiyTextbox = new views.Textbox();
-  ElectricalCondutivitiyTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
+  ElectricalCondutivitiyTextbox.binding.value = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
   ElectricalCondutivitiyTextbox.size.value = 17;
   ElectricalCondutivitiyLabel.text.value = 'Electrical Condutivitiy ';
   ElectricalCondutivitiyTextbox.maxLength.value = 15;
@@ -735,7 +733,7 @@ var behaviours = app.behaviours;
   ElectricalCondutivitiyLabelContainer.classes.value = 'field'
   var ElectricalCondutivitiyLabel = new views.Label();
   var ElectricalCondutivitiyTextbox = new views.Textbox();
-  ElectricalCondutivitiyTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
+  ElectricalCondutivitiyTextbox.binding.value = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
   ElectricalCondutivitiyTextbox.size.value = 17;
   ElectricalCondutivitiyLabel.text.value = 'Electrical Condutivitiy ';
   ElectricalCondutivitiyTextbox.maxLength.value = 15;
@@ -757,7 +755,7 @@ var behaviours = app.behaviours;
   ElectricalCondutivitiyLabelContainer.classes.value = 'field'
   var pHLabel = new views.Label();
   var pHTextbox = new views.Textbox();
-  pHTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
+  pHTextbox.binding.value = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
   pHTextbox.size.value = 17;
   pHLabel.text.value = 'pH';
   pHTextbox.maxLength.value = 15;
@@ -774,7 +772,7 @@ var behaviours = app.behaviours;
   pHLabelContainer.classes.value = 'field'
   var RedOxLabel = new views.Label();
   var RedOxTextbox = new views.Textbox();
-  RedOxTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
+  RedOxTextbox.binding.value = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
   RedOxTextbox.size.value = 17;
   RedOxLabel.text.value = 'RedOx ';
   RedOxTextbox.maxLength.value = 15;
@@ -796,7 +794,7 @@ var behaviours = app.behaviours;
   RedOxLabelContainer.classes.value = 'field'
   var TempLabel = new views.Label();
   var TempTextbox = new views.Textbox();
-  TempTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
+  TempTextbox.binding.value = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
   TempTextbox.size.value = 17;
   TempLabel.text.value = 'Temp ';
   TempTextbox.maxLength.value = 15;
@@ -818,7 +816,7 @@ var behaviours = app.behaviours;
   TempLabelContainer.classes.value = 'field'
   var TurbidityLabel = new views.Label();
   var TurbidityTextbox = new views.Textbox();
-  TurbidityTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
+  TurbidityTextbox.binding.value = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
   TurbidityTextbox.size.value = 17;
   TurbidityLabel.text.value = 'Turbidity ';
   TurbidityTextbox.maxLength.value = 15;
@@ -840,9 +838,7 @@ var behaviours = app.behaviours;
   TurbidityLabelContainer.classes.value = 'field'
   var MeasurementCommentsLabel = new views.Label();
   var MeasurementCommentsTextarea = new views.Textarea();
-  MeasurementCommentsTextarea.value.binding = '[SAMPLE_COMMNT]'
-  MeasurementCommentsTextarea.cols.value = 50;
-  MeasurementCommentsTextarea.rows.value = 4;
+  MeasurementCommentsTextarea.binding.value = '[SAMPLE_COMMNT]'
   MeasurementCommentsLabel.text.value = 'Measurement Comments';
   MeasurementCommentsLabel.classes.value = 'fldname';
 
@@ -871,7 +867,7 @@ var behaviours = app.behaviours;
   DischargewaterdisposalLabelContainer.classes.value = 'field'
   var DrumsLabel = new views.Label();
   var DrumsRadio = new views.Radio();
-  DrumsRadio.value.binding = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
+  DrumsRadio.binding.value = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
   DrumsLabel.text.value = 'Drums';
   DrumsLabel.classes.value = 'fldname';
 
@@ -886,7 +882,7 @@ var behaviours = app.behaviours;
   DrumsLabelContainer.classes.value = 'field'
   var SanitaryLabel = new views.Label();
   var SanitaryRadio = new views.Radio();
-  SanitaryRadio.value.binding = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
+  SanitaryRadio.binding.value = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
   SanitaryLabel.text.value = 'Sanitary';
   SanitaryLabel.classes.value = 'fldname';
 
@@ -901,7 +897,7 @@ var behaviours = app.behaviours;
   SanitaryLabelContainer.classes.value = 'field'
   var SewerStormLabel = new views.Label();
   var SewerStormRadio = new views.Radio();
-  SewerStormRadio.value.binding = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
+  SewerStormRadio.binding.value = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
   SewerStormLabel.text.value = 'Sewer Storm';
   SewerStormLabel.classes.value = 'fldname';
 
@@ -916,7 +912,7 @@ var behaviours = app.behaviours;
   SewerStormLabelContainer.classes.value = 'field'
   var SewerLabel = new views.Label();
   var SewerRadio = new views.Radio();
-  SewerRadio.value.binding = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
+  SewerRadio.binding.value = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
   SewerLabel.text.value = 'Sewer';
   SewerLabel.classes.value = 'fldname';
 
@@ -931,7 +927,7 @@ var behaviours = app.behaviours;
   SewerLabelContainer.classes.value = 'field'
   var OtherLabel = new views.Label();
   var OtherRadio = new views.Radio();
-  OtherRadio.value.binding = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
+  OtherRadio.binding.value = '[SAMPLE_SPARE2 | SAMPLE_SAMPTYPE = DISCH]'
   OtherLabel.text.value = 'Other';
   OtherLabel.classes.value = 'fldname';
 
@@ -946,9 +942,7 @@ var behaviours = app.behaviours;
   OtherLabelContainer.classes.value = 'field'
   var OtherCommentLabel = new views.Label();
   var OtherCommentTextarea = new views.Textarea();
-  OtherCommentTextarea.value.binding = '[SAMPLE_COMMNT]'
-  OtherCommentTextarea.cols.value = 50;
-  OtherCommentTextarea.rows.value = 4;
+  OtherCommentTextarea.binding.value = '[SAMPLE_COMMNT]'
   OtherCommentLabel.text.value = 'Other Comment';
   OtherCommentLabel.classes.value = 'fldname';
 
@@ -963,7 +957,7 @@ var behaviours = app.behaviours;
   OtherCommentLabelContainer.classes.value = 'field'
   var WellSamplingLabel = new views.Label();
   var WellSamplingLabel = new views.Label();
-  WellSamplingLabel.value.binding = '[PUMPTEST_COMMENT]'
+  WellSamplingLabel.binding.value = '[PUMPTEST_COMMENT]'
   WellSamplingLabel.text.value = 'Well Sampling ';
   WellSamplingLabel.classes.value = 'fldname';
 
@@ -978,7 +972,7 @@ var behaviours = app.behaviours;
   WellSamplingLabelContainer.classes.value = 'field'
   var SampleTakenLabel = new views.Label();
   var SampleTakenCheckbox = new views.Checkbox();
-  SampleTakenCheckbox.value.binding = '[AREASMT_SAMPFLAG]'
+  SampleTakenCheckbox.binding.value = '[AREASMT_SAMPFLAG]'
   SampleTakenLabel.text.value = 'Sample Taken';
   SampleTakenLabel.classes.value = 'fldname';
 
@@ -993,7 +987,7 @@ var behaviours = app.behaviours;
   SampleTakenLabelContainer.classes.value = 'field'
   var SamplingMethodLabel = new views.Label();
   var SamplingMethodSelect = new views.Select();
-  SamplingMethodSelect.value.binding = '[SAMPLES_COLLMETH]'
+  SamplingMethodSelect.binding.value = '[SAMPLES_COLLMETH]'
   SamplingMethodSelect.options.value = ['AI','AS','PA'];
   SamplingMethodLabel.text.value = 'Sampling Method';
   SamplingMethodLabel.classes.value = 'fldname';
@@ -1009,7 +1003,7 @@ var behaviours = app.behaviours;
   SamplingMethodLabelContainer.classes.value = 'field'
   var BOTTLENUMBERLabel = new views.Label();
   var BOTTLENUMBERTextbox = new views.Textbox();
-  BOTTLENUMBERTextbox.value.binding = '[SAMPLES_BOTTLE]'
+  BOTTLENUMBERTextbox.binding.value = '[SAMPLES_BOTTLE]'
   BOTTLENUMBERTextbox.size.value = 22;
   BOTTLENUMBERLabel.text.value = 'BOTTLE NUMBER';
   BOTTLENUMBERTextbox.maxLength.value = 20;
@@ -1026,7 +1020,7 @@ var behaviours = app.behaviours;
   BOTTLENUMBERLabelContainer.classes.value = 'field'
   var SAMPLENUMBERLabel = new views.Label();
   var SAMPLENUMBERTextbox = new views.Textbox();
-  SAMPLENUMBERTextbox.value.binding = '[SAMPLES_SAMPNUM]'
+  SAMPLENUMBERTextbox.binding.value = '[SAMPLES_SAMPNUM]'
   SAMPLENUMBERTextbox.size.value = 32;
   SAMPLENUMBERLabel.text.value = 'SAMPLE NUMBER';
   SAMPLENUMBERTextbox.maxLength.value = 30;
@@ -1043,7 +1037,7 @@ var behaviours = app.behaviours;
   SAMPLENUMBERLabelContainer.classes.value = 'field'
   var BOTTLETYPELabel = new views.Label();
   var BOTTLETYPESelect = new views.Select();
-  BOTTLETYPESelect.value.binding = '[SAMPLES_SPARE2]'
+  BOTTLETYPESelect.binding.value = '[SAMPLES_SPARE2]'
   BOTTLETYPESelect.options.value = ['amber glass','plastic'];
   BOTTLETYPELabel.text.value = 'BOTTLE TYPE';
   BOTTLETYPELabel.classes.value = 'fldname';
@@ -1073,7 +1067,7 @@ var behaviours = app.behaviours;
   SampleTypeLabelContainer.classes.value = 'field'
   var PRIMARYLabel = new views.Label();
   var PRIMARYRadio = new views.Radio();
-  PRIMARYRadio.value.binding = '[SAMPLES_SAMPTYPE]'
+  PRIMARYRadio.binding.value = '[SAMPLES_SAMPTYPE]'
   PRIMARYLabel.text.value = 'PRIMARY';
   PRIMARYLabel.classes.value = 'fldname';
 
@@ -1088,7 +1082,7 @@ var behaviours = app.behaviours;
   PRIMARYLabelContainer.classes.value = 'field'
   var DUPE1Label = new views.Label();
   var DUPE1Radio = new views.Radio();
-  DUPE1Radio.value.binding = '[SAMPLES_SAMPTYPE]'
+  DUPE1Radio.binding.value = '[SAMPLES_SAMPTYPE]'
   DUPE1Label.text.value = 'DUPE1';
   DUPE1Label.classes.value = 'fldname';
 
@@ -1103,7 +1097,7 @@ var behaviours = app.behaviours;
   DUPE1LabelContainer.classes.value = 'field'
   var DUPE2Label = new views.Label();
   var DUPE2Radio = new views.Radio();
-  DUPE2Radio.value.binding = '[SAMPLES_SAMPTYPE]'
+  DUPE2Radio.binding.value = '[SAMPLES_SAMPTYPE]'
   DUPE2Label.text.value = 'DUPE2';
   DUPE2Label.classes.value = 'fldname';
 
@@ -1118,7 +1112,7 @@ var behaviours = app.behaviours;
   DUPE2LabelContainer.classes.value = 'field'
   var DUPE3Label = new views.Label();
   var DUPE3Radio = new views.Radio();
-  DUPE3Radio.value.binding = '[SAMPLES_SAMPTYPE]'
+  DUPE3Radio.binding.value = '[SAMPLES_SAMPTYPE]'
   DUPE3Label.text.value = 'DUPE3';
   DUPE3Label.classes.value = 'fldname';
 
@@ -1133,7 +1127,7 @@ var behaviours = app.behaviours;
   DUPE3LabelContainer.classes.value = 'field'
   var TRIPCLICATE1Label = new views.Label();
   var TRIPCLICATE1Radio = new views.Radio();
-  TRIPCLICATE1Radio.value.binding = '[SAMPLES_SAMPTYPE]'
+  TRIPCLICATE1Radio.binding.value = '[SAMPLES_SAMPTYPE]'
   TRIPCLICATE1Label.text.value = 'TRIPCLICATE1';
   TRIPCLICATE1Label.classes.value = 'fldname';
 
@@ -1148,7 +1142,7 @@ var behaviours = app.behaviours;
   TRIPCLICATE1LabelContainer.classes.value = 'field'
   var TRIPCLICATE2Label = new views.Label();
   var TRIPCLICATE2Radio = new views.Radio();
-  TRIPCLICATE2Radio.value.binding = '[SAMPLES_SAMPTYPE]'
+  TRIPCLICATE2Radio.binding.value = '[SAMPLES_SAMPTYPE]'
   TRIPCLICATE2Label.text.value = 'TRIPCLICATE2';
   TRIPCLICATE2Label.classes.value = 'fldname';
 
@@ -1163,7 +1157,7 @@ var behaviours = app.behaviours;
   TRIPCLICATE2LabelContainer.classes.value = 'field'
   var TRIPCLICATE3Label = new views.Label();
   var TRIPCLICATE3Radio = new views.Radio();
-  TRIPCLICATE3Radio.value.binding = '[SAMPLES_SAMPTYPE]'
+  TRIPCLICATE3Radio.binding.value = '[SAMPLES_SAMPTYPE]'
   TRIPCLICATE3Label.text.value = 'TRIPCLICATE3';
   TRIPCLICATE3Label.classes.value = 'fldname';
 
@@ -1178,7 +1172,7 @@ var behaviours = app.behaviours;
   TRIPCLICATE3LabelContainer.classes.value = 'field'
   var RINSATE1Label = new views.Label();
   var RINSATE1Radio = new views.Radio();
-  RINSATE1Radio.value.binding = '[SAMPLES_SAMPTYPE]'
+  RINSATE1Radio.binding.value = '[SAMPLES_SAMPTYPE]'
   RINSATE1Label.text.value = 'RINSATE1';
   RINSATE1Label.classes.value = 'fldname';
 
@@ -1193,7 +1187,7 @@ var behaviours = app.behaviours;
   RINSATE1LabelContainer.classes.value = 'field'
   var RINSATE2Label = new views.Label();
   var RINSATE2Radio = new views.Radio();
-  RINSATE2Radio.value.binding = '[SAMPLES_SAMPTYPE]'
+  RINSATE2Radio.binding.value = '[SAMPLES_SAMPTYPE]'
   RINSATE2Label.text.value = 'RINSATE2';
   RINSATE2Label.classes.value = 'fldname';
 
@@ -1208,7 +1202,7 @@ var behaviours = app.behaviours;
   RINSATE2LabelContainer.classes.value = 'field'
   var RINSATE3Label = new views.Label();
   var RINSATE3Radio = new views.Radio();
-  RINSATE3Radio.value.binding = '[SAMPLES_SAMPTYPE]'
+  RINSATE3Radio.binding.value = '[SAMPLES_SAMPTYPE]'
   RINSATE3Label.text.value = 'RINSATE3';
   RINSATE3Label.classes.value = 'fldname';
 
@@ -1223,7 +1217,7 @@ var behaviours = app.behaviours;
   RINSATE3LabelContainer.classes.value = 'field'
   var TRIPBLANKLabel = new views.Label();
   var TRIPBLANKRadio = new views.Radio();
-  TRIPBLANKRadio.value.binding = '[SAMPLES_SAMPTYPE]'
+  TRIPBLANKRadio.binding.value = '[SAMPLES_SAMPTYPE]'
   TRIPBLANKLabel.text.value = 'TRIP BLANK';
   TRIPBLANKLabel.classes.value = 'fldname';
 
@@ -1238,7 +1232,7 @@ var behaviours = app.behaviours;
   TRIPBLANKLabelContainer.classes.value = 'field'
   var TRIPSPIKELabel = new views.Label();
   var TRIPSPIKERadio = new views.Radio();
-  TRIPSPIKERadio.value.binding = '[SAMPLES_SAMPTYPE]'
+  TRIPSPIKERadio.binding.value = '[SAMPLES_SAMPTYPE]'
   TRIPSPIKELabel.text.value = 'TRIP SPIKE';
   TRIPSPIKELabel.classes.value = 'fldname';
 
@@ -1253,9 +1247,7 @@ var behaviours = app.behaviours;
   TRIPSPIKELabelContainer.classes.value = 'field'
   var SampleCommentLabel = new views.Label();
   var SampleCommentTextarea = new views.Textarea();
-  SampleCommentTextarea.value.binding = '[SAMPLES_COMMNT]'
-  SampleCommentTextarea.cols.value = 50;
-  SampleCommentTextarea.rows.value = 4;
+  SampleCommentTextarea.binding.value = '[SAMPLES_COMMNT]'
   SampleCommentLabel.text.value = 'Sample Comment';
   SampleCommentLabel.classes.value = 'fldname';
 
@@ -1406,7 +1398,7 @@ function supports_html5_storage() {
 }
 
 module.exports = app;
-},{"./actions":1,"./behaviours":2,"./controls/appWrapper":3,"./gelExtensions":7,"./views":8,"gaffa":40}],5:[function(require,module,exports){
+},{"./actions":1,"./behaviours":2,"./controls/appWrapper":3,"./gelExtensions":7,"./views":8,"gaffa":48}],5:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     AjaxAction = require('gaffa-ajax'),
     doc = require('doc-js'),
@@ -1437,7 +1429,7 @@ Field.prototype.error = new Gaffa.Property(function(view, error){
 });
 
 module.exports = Field;
-},{"crel":9,"doc-js":11,"gaffa":40,"gaffa-ajax":15,"gaffa-container":22}],6:[function(require,module,exports){
+},{"crel":9,"doc-js":11,"gaffa":48,"gaffa-ajax":15,"gaffa-container":22}],6:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     statham = require('statham');
@@ -1486,7 +1478,7 @@ Frame.prototype.url = new Gaffa.Property(function(view, value){
 });
 
 module.exports = Frame;
-},{"crel":9,"gaffa":40,"statham":62}],7:[function(require,module,exports){
+},{"crel":9,"gaffa":48,"statham":70}],7:[function(require,module,exports){
 var pathHelpers = require('gedi-paths');
 
 module.exports = function(app){
@@ -1496,7 +1488,7 @@ module.exports = function(app){
         };
     };
 };
-},{"gedi-paths":56}],8:[function(require,module,exports){
+},{"gedi-paths":64}],8:[function(require,module,exports){
 module.exports = function(gaffa){
     var views = {
         Container : require('gaffa-container'),
@@ -1511,7 +1503,10 @@ module.exports = function(gaffa){
         Image : require('gaffa-image'),
         Html : require('gaffa-html'),
         Textbox : require('gaffa-textbox'),
+        Textarea : require('gaffa-textarea'),
         Checkbox : require('gaffa-checkbox'),
+        Radio : require('gaffa-radio'),
+        Select : require('gaffa-select'),
         Frame : require('./gaffaExtensions/views/frame'),
         Field : require('./gaffaExtensions/views/field')
     };
@@ -1522,7 +1517,7 @@ module.exports = function(gaffa){
 
     return views;
 };
-},{"./gaffaExtensions/views/field":5,"./gaffaExtensions/views/frame":6,"gaffa-anchor":16,"gaffa-button":18,"gaffa-checkbox":19,"gaffa-container":22,"gaffa-form":23,"gaffa-group":24,"gaffa-heading":25,"gaffa-html":26,"gaffa-image":27,"gaffa-label":28,"gaffa-list":29,"gaffa-text":36,"gaffa-textbox":38}],9:[function(require,module,exports){
+},{"./gaffaExtensions/views/field":5,"./gaffaExtensions/views/frame":6,"gaffa-anchor":16,"gaffa-button":18,"gaffa-checkbox":19,"gaffa-container":22,"gaffa-form":23,"gaffa-group":24,"gaffa-heading":25,"gaffa-html":26,"gaffa-image":27,"gaffa-label":28,"gaffa-list":29,"gaffa-radio":34,"gaffa-select":41,"gaffa-text":43,"gaffa-textarea":44,"gaffa-textbox":46}],9:[function(require,module,exports){
 //Copyright (C) 2012 Kory Nunn
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -2418,7 +2413,7 @@ Ajax.prototype.headers = new Gaffa.Property();
 Ajax.prototype.url = new Gaffa.Property();
 
 module.exports = Ajax;
-},{"gaffa":40}],16:[function(require,module,exports){
+},{"gaffa":48}],16:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -2483,7 +2478,7 @@ Anchor.prototype.href = new Gaffa.Property(function(viewModel, value){
 });
 
 module.exports = Anchor;
-},{"crel":9,"gaffa":40}],17:[function(require,module,exports){
+},{"crel":9,"gaffa":48}],17:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "browserStorage";
 
@@ -2531,7 +2526,7 @@ BrowserStorage.prototype.source = new Gaffa.Property();
 
 module.exports = BrowserStorage;
 
-},{"gaffa":40}],18:[function(require,module,exports){
+},{"gaffa":48}],18:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -2575,7 +2570,7 @@ Button.prototype.disabled = new Gaffa.Property(function(viewModel, value){
 });
 
 module.exports = Button;
-},{"crel":9,"gaffa":40}],19:[function(require,module,exports){
+},{"crel":9,"gaffa":48}],19:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -2625,7 +2620,7 @@ Checkbox.prototype.showLabel = new Gaffa.Property(function(view, value){
 });
 
 module.exports = Checkbox;
-},{"crel":9,"gaffa":40}],20:[function(require,module,exports){
+},{"crel":9,"gaffa":48}],20:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "clean";
 
@@ -2645,7 +2640,7 @@ Clean.prototype.target = new Gaffa.Property();
 Clean.prototype.triggerEvents = new Gaffa.Property();
 
 module.exports = Clean;
-},{"gaffa":40}],21:[function(require,module,exports){
+},{"gaffa":48}],21:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "conditional";
 
@@ -2666,7 +2661,7 @@ Conditional.prototype.trigger = function(parent, scope, event) {
 
 
 module.exports =  Conditional;
-},{"gaffa":40}],22:[function(require,module,exports){
+},{"gaffa":48}],22:[function(require,module,exports){
 var Gaffa = require('gaffa');
 
 function Container(){}
@@ -2680,7 +2675,7 @@ Container.prototype.render = function(){
 };
 
 module.exports = Container;
-},{"gaffa":40}],23:[function(require,module,exports){
+},{"gaffa":48}],23:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     doc = require('doc-js'),
     crel = require('crel');
@@ -2730,7 +2725,7 @@ Form.prototype.method = new Gaffa.Property({
 Form.prototype.valid = new Gaffa.Property();
 
 module.exports = Form;
-},{"crel":9,"doc-js":11,"gaffa":40}],24:[function(require,module,exports){
+},{"crel":9,"doc-js":11,"gaffa":48}],24:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     viewType = "group";
@@ -2824,7 +2819,7 @@ Group.prototype.groups = new Gaffa.Property({
 });
 
 module.exports = Group;
-},{"crel":9,"gaffa":40}],25:[function(require,module,exports){
+},{"crel":9,"gaffa":48}],25:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -2854,7 +2849,7 @@ Heading.prototype.text = new Gaffa.Property(function(view, value){
 });
 
 module.exports = Heading;
-},{"crel":9,"gaffa":40}],26:[function(require,module,exports){
+},{"crel":9,"gaffa":48}],26:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -2879,7 +2874,7 @@ Html.prototype.html = new Gaffa.Property(function(viewModel, value){
 });
 
 module.exports = Html;
-},{"crel":9,"gaffa":40}],27:[function(require,module,exports){
+},{"crel":9,"gaffa":48}],27:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
 	cachedElement;
@@ -2918,7 +2913,7 @@ Image.prototype.image = new Gaffa.Property(function (viewModel, value) {
 });
 
 module.exports = Image;
-},{"crel":9,"gaffa":40}],28:[function(require,module,exports){
+},{"crel":9,"gaffa":48}],28:[function(require,module,exports){
 "use strict";
 
 var Gaffa = require('gaffa'),
@@ -2956,7 +2951,7 @@ Label.prototype.labelFor = new Gaffa.Property(function (viewModel, value) {
 });
 
 module.exports = Label;
-},{"crel":9,"gaffa":40}],29:[function(require,module,exports){
+},{"crel":9,"gaffa":48}],29:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     TemplaterProperty = require('gaffa/templaterProperty');
@@ -2983,7 +2978,7 @@ List.prototype.list = new TemplaterProperty({
 });
 
 module.exports = List;
-},{"crel":9,"gaffa":40,"gaffa/templaterProperty":54}],30:[function(require,module,exports){
+},{"crel":9,"gaffa":48,"gaffa/templaterProperty":62}],30:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     behaviourType = 'modelChange';
 
@@ -3032,7 +3027,7 @@ ModelChangeBehaviour.prototype.watch = new Gaffa.Property({
 });
 
 module.exports = ModelChangeBehaviour;
-},{"gaffa":40}],31:[function(require,module,exports){
+},{"gaffa":48}],31:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "navigate";
 
@@ -3054,7 +3049,7 @@ Navigate.prototype.trigger = function() {
 }
 
 module.exports = Navigate;
-},{"gaffa":40}],32:[function(require,module,exports){
+},{"gaffa":48}],32:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     behaviourType = 'pageLoad';
 
@@ -3067,7 +3062,7 @@ PageLoadBehaviour.prototype.bind = function(){
 };
 
 module.exports = PageLoadBehaviour;
-},{"gaffa":40}],33:[function(require,module,exports){
+},{"gaffa":48}],33:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "push";
 
@@ -3102,7 +3097,79 @@ Push.prototype.clone = new Gaffa.Property({
 
 
 module.exports = Push;
-},{"gaffa":40}],34:[function(require,module,exports){
+},{"gaffa":48}],34:[function(require,module,exports){
+var Gaffa = require('gaffa'),
+    crel = require('crel'),
+    doc = require('doc-js');
+
+function Radio(){}
+Radio = Gaffa.createSpec(Radio, Gaffa.View);
+Radio.prototype._type = 'radio';
+Radio.prototype.render = function() {
+    var viewModel = this,
+        renderedElement = crel('div');
+
+    doc(renderedElement).on(this.updateEventName || "change", function (event) {
+        viewModel.value.set(doc(renderedElement).findOne(':checked').data);
+    });
+
+    this.renderedElement = renderedElement;
+}
+
+function updateOptions(viewModel) {
+    var property = this,
+        gaffa = property.gaffa,
+        element = viewModel.renderedElement,
+        value = viewModel.options.value,
+        groupName = viewModel.groupName.value;
+
+    if (!Array.isArray(value)) {
+        value = [];
+    }
+
+    element.innerHTML = '';
+    for (var i = 0; i < value.length; i++) {
+        var optionData = value[i];
+        if (optionData !== undefined) {
+            var id = groupName + '-' + i,
+                option = crel('input', {type: 'radio', name: groupName, id: id}),
+                label = crel('label'),
+                container = crel('div');
+
+            label.setAttribute('for', id);
+
+            option.value = option.data = property.valueBinding ? gaffa.gedi.get(property.valueBinding, property.getPath(), {option: optionData}) : optionData;
+            label.textContent = property.textBinding ? gaffa.gedi.get(property.textBinding, property.getPath(), {option: optionData}) : optionData;
+
+            crel(element,
+                crel(container, option, label)
+            );
+        }
+    }
+}
+
+Radio.prototype.groupName = new Gaffa.Property({
+    value: 'radio-' + Math.floor(Math.random() * 10000),
+    update: updateOptions
+});
+
+Radio.prototype.options = new Gaffa.Property(updateOptions);
+
+Radio.prototype.value = new Gaffa.Property(function (view, value) {
+    var options = doc(view.renderedElement).find('input');
+
+    for(var i = 0; i < options.length; i++){
+        var option = options[i];
+        if(value === option.data){
+            option.setAttribute('checked', 'checked');
+        }else{
+            option.removeAttribute('checked');
+        }
+    }
+});
+
+module.exports = Radio;
+},{"crel":9,"doc-js":11,"gaffa":48}],35:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "remove";
 
@@ -3119,7 +3186,247 @@ Remove.prototype.cleans = new Gaffa.Property();
 
 
 module.exports = Remove;
-},{"gaffa":40}],35:[function(require,module,exports){
+},{"gaffa":48}],36:[function(require,module,exports){
+function escapeHex(hex){
+    return String.fromCharCode(hex);
+}
+
+function createKey(number){
+    if(number + 0xE001 > 0xFFFF){
+        throw "Too many references. Log an issue on gihub an i'll add an order of magnatude to the keys.";
+    }
+    return escapeHex(number + 0xE001);
+}
+
+module.exports = createKey;
+},{}],37:[function(require,module,exports){
+var revive = require('./revive');
+
+function parse(json, reviver){
+    return revive(JSON.parse(json, reviver));
+}
+
+module.exports = parse;
+},{"./revive":38}],38:[function(require,module,exports){
+var createKey = require('./createKey'),
+    keyKey = createKey(-1);
+
+function revive(input){
+    var objects = {},
+        scannedObjects = [];
+
+    function scan(input){
+        var output = input;
+
+        if(typeof output !== 'object'){
+            return output;
+        }
+
+        output = input instanceof Array ? [] : {};
+
+        if(input[keyKey]){
+            objects[input[keyKey]] = output;
+        }
+
+        for(var key in input){
+            var value = input[key];
+
+            if(key === keyKey){
+                continue;
+            }
+
+            if(value != null && typeof value === 'object'){
+                if(scannedObjects.indexOf(value)<0){
+                    scannedObjects.push(value);
+                    output[key] = scan(value);
+                }
+            }else if(typeof value === 'string' && value.length === 1 && value.charCodeAt(0) > keyKey.charCodeAt(0)){
+                output[key] = objects[value];
+            }else{
+                output[key] = input[key];
+            }
+        }
+        return output;
+    }
+
+    return scan(input);
+}
+
+module.exports = revive;
+},{"./createKey":36}],39:[function(require,module,exports){
+module.exports = {
+    stringify: require('./stringify'),
+    parse: require('./parse'),
+    revive: require('./revive')
+};
+},{"./parse":37,"./revive":38,"./stringify":40}],40:[function(require,module,exports){
+var createKey = require('./createKey'),
+    keyKey = createKey(-1);
+
+function toJsonValue(value){
+    if(value != null && typeof value === 'object'){
+        var result = value instanceof Array ? [] : {},
+            output = value;
+        if('toJSON' in value){
+            output = value.toJSON();
+        }
+        for(var key in output){
+            result[key] = output[key];
+        }
+        return result;
+    }
+
+    return value;
+}
+
+function stringify(input, replacer, spacer){
+    var objects = [],
+        outputObjects = [],
+        refs = [];
+
+    function scan(input){
+
+        if(input === null || typeof input !== 'object'){
+            return input;
+        }
+
+        var output,
+            index = objects.indexOf(input);
+
+        if(index >= 0){
+            outputObjects[index][keyKey] = refs[index]
+            return refs[index];
+        }
+
+        index = objects.length;
+        objects[index] = input;
+        output = toJsonValue(input);
+        outputObjects[index] = output;
+        refs[index] = createKey(index);
+
+        for(var key in output){
+            output[key] = scan(output[key]);
+        }
+
+        return output;
+    }
+
+    return JSON.stringify(scan(input), replacer, spacer);
+}
+
+module.exports = stringify;
+},{"./createKey":36}],41:[function(require,module,exports){
+var Gaffa = require('gaffa'),
+    crel = require('crel'),
+    doc = require('doc-js'),
+    statham = require('statham'),
+    viewType = "select",
+    cachedElement;
+
+function Select(){}
+Select = Gaffa.createSpec(Select, Gaffa.View);
+Select.prototype.type = viewType;
+
+Select.prototype.render = function(){
+    var view = this,
+        select,
+        renderedElement = crel('span',
+            select = crel('select')
+        );
+
+    renderedElement.className = 'select';
+
+    doc.on(this.updateEventName || "change", select, function(event){
+        var option,
+            data;
+
+        for(var i = 0; i < select.childNodes.length; i++){
+            if(select.childNodes[i].value === select.value){
+                option = select.childNodes[i];
+            }
+        }
+
+        data = option && option.data || undefined;
+
+        view.value.set(data);
+    });
+
+    this.renderedElement = renderedElement;
+
+};
+
+Select.prototype.options = new Gaffa.Property({
+    elements: [],
+    update: function(view, value) {
+        var property = this,
+            element = view.renderedElement.childNodes[0];
+
+        if(!element){
+            return;
+        }
+
+        element.innerHTML = '';
+        property.elements = [];
+
+        if(!value){
+            return;
+        }
+
+        if(view.showBlank.value)
+        {
+            element.appendChild(document.createElement("option"));
+        }
+
+        for(var key in value){
+            var optionData = value[key];
+            if(optionData !== undefined){
+                var option = document.createElement('option');
+
+                option.value = option.data = property.valueBinding ? gaffa.gedi.get(property.valueBinding, property.getPath(), {option: optionData}) : optionData;
+                option.textContent = property.textBinding ? gaffa.gedi.get(property.textBinding, property.getPath(), {option: optionData}) : optionData;
+
+                element.appendChild(option);
+                property.elements.push(option);
+            }
+        }
+
+        element.value = null;
+        view.value.update(view, view.value.value);
+    }
+});
+
+Select.prototype.value = new Gaffa.Property({
+    update: function(view, value) {
+        view.renderedElement.childNodes[0].value = value;
+        for(var i = 0; i < view.options.elements.length; i++){
+            if(view.options.elements[i].data === value){
+                view.options.elements[i].selected = true;
+                break;
+            }
+        }
+    },
+    sameAsPrevious: function(){
+        var oldHash = this.getPreviousHash(),
+            newHash = statham.stringify(this.value);
+
+        this.setPreviousHash(newHash);
+
+        return oldHash === newHash;
+    }
+});
+
+Select.prototype.showBlank = new Gaffa.Property();
+
+Select.prototype.required = new Gaffa.Property(function(view, value){
+    if (value){
+        view.renderedElement.setAttribute('required', 'required');
+    }else{
+        view.renderedElement.removeAttribute('required');
+    }
+});
+
+module.exports = Select;
+},{"crel":9,"doc-js":11,"gaffa":48,"statham":39}],42:[function(require,module,exports){
 var Gaffa = require('gaffa');
 
 function Set(){}
@@ -3143,7 +3450,7 @@ Set.prototype.cleans = new Gaffa.Property({
 });
 
 module.exports = Set;
-},{"gaffa":40}],36:[function(require,module,exports){
+},{"gaffa":48}],43:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     viewType = "text";
@@ -3170,7 +3477,44 @@ Text.prototype.enabled = undefined;
 Text.prototype.classes = undefined;
 
 module.exports = Text;
-},{"crel":9,"gaffa":40}],37:[function(require,module,exports){
+},{"crel":9,"gaffa":48}],44:[function(require,module,exports){
+var Gaffa = require('gaffa'),
+    crel = require('crel'),
+    doc = require('doc-js'),
+    viewType = "textarea",
+	cachedElement;
+
+function Textarea(){}
+Textarea = Gaffa.createSpec(Textarea, Gaffa.View);
+Textarea.prototype.type = viewType;
+
+Textarea.prototype.render = function(){
+    var view = this,
+        renderedElement = crel('textarea');
+
+    doc.on(this.updateEventName || "change", renderedElement, function(){
+        view.value.set(renderedElement.value);
+    });
+
+    this.renderedElement = renderedElement;
+
+};
+
+Textarea.prototype.value = new Gaffa.Property(function(view, value){
+    view.renderedElement.value = value || '';
+});
+
+Textarea.prototype.placeholder = new Gaffa.Property(function(view, value){
+    view.renderedElement[value ? 'setAttribute' : 'removeAttribute']('placeholder', value);
+
+});
+
+Textarea.prototype.disabled = new Gaffa.Property(function(view, value){
+    view.renderedElement[value ? 'setAttribute' : 'removeAttribute']('disabled', value);
+});
+
+module.exports = Textarea;
+},{"crel":9,"doc-js":11,"gaffa":48}],45:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     doc = require('doc-js');
@@ -3258,7 +3602,7 @@ FormElement.prototype.validity = new Gaffa.Property(function(view, value){
 });
 
 module.exports = FormElement;
-},{"crel":9,"doc-js":11,"gaffa":40}],38:[function(require,module,exports){
+},{"crel":9,"doc-js":11,"gaffa":48}],46:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     FormElement = require('gaffa-formelement');
 
@@ -3287,7 +3631,7 @@ Textbox.prototype.size = new Gaffa.Property(function(view, value){
 });
 
 module.exports = Textbox;
-},{"gaffa":40,"gaffa-formelement":37}],39:[function(require,module,exports){
+},{"gaffa":48,"gaffa-formelement":45}],47:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     actionType = "toggle";
 
@@ -3301,7 +3645,7 @@ Toggle.prototype.trigger = function(){
 Toggle.prototype.target = new Gaffa.Property();
 
 module.exports = Toggle;
-},{"gaffa":40}],40:[function(require,module,exports){
+},{"gaffa":48}],48:[function(require,module,exports){
 //Copyright (C) 2012 Kory Nunn, Matt Ginty & Maurice Butler
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -5392,7 +5736,7 @@ module.exports = Gaffa;
 
 ///[license.md]
 
-},{"./raf.js":53,"crel":41,"deep-equal":42,"doc-js":11,"events":57,"fasteach":43,"gedi":45,"spec-js":52}],41:[function(require,module,exports){
+},{"./raf.js":61,"crel":49,"deep-equal":50,"doc-js":11,"events":65,"fasteach":51,"gedi":53,"spec-js":60}],49:[function(require,module,exports){
 //Copyright (C) 2012 Kory Nunn
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -5514,7 +5858,7 @@ module.exports = Gaffa;
     return crel;
 }));
 
-},{}],42:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var Object_keys = typeof Object.keys === 'function'
     ? Object.keys
@@ -5600,14 +5944,14 @@ function objEquiv(a, b) {
   return true;
 }
 
-},{}],43:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 function fastEach(items, callback) {
     for (var i = 0; i < items.length && !callback(items[i], i, items);i++) {}
     return items;
 }
 
 module.exports = fastEach;
-},{}],44:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 var WM = typeof WM !== 'undefined' ? WeakMap : require('weak-map'),
     paths = require('gedi-paths'),
     pathConstants = paths.constants
@@ -6009,7 +6353,7 @@ module.exports = function(modelGet, gel, PathToken){
         removeModelReference: removeModelReference
     };
 };
-},{"./modelOperations":46,"gedi-paths":56,"weak-map":50}],45:[function(require,module,exports){
+},{"./modelOperations":54,"gedi-paths":64,"weak-map":58}],53:[function(require,module,exports){
 //Copyright (C) 2012 Kory Nunn
 
 //Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -6624,7 +6968,7 @@ function newGedi(model) {
 }
 
 module.exports = gediConstructor;
-},{"./events":44,"./modelOperations":46,"./pathToken":51,"gedi-paths":56,"gel-js":47,"spec-js":52}],46:[function(require,module,exports){
+},{"./events":52,"./modelOperations":54,"./pathToken":59,"gedi-paths":64,"gel-js":55,"spec-js":60}],54:[function(require,module,exports){
 var paths = require('gedi-paths'),
     memoiseCache = {};
 
@@ -6754,7 +7098,7 @@ module.exports = {
     get: get,
     set: set
 };
-},{"gedi-paths":56}],47:[function(require,module,exports){
+},{"gedi-paths":64}],55:[function(require,module,exports){
 var Lang = require('lang-js'),
     paths = require('gedi-paths'),
     createNestingParser = Lang.createNestingParser,
@@ -7989,7 +8333,7 @@ Gel = function(){
 Gel.Token = Token;
 Gel.Scope = Scope;
 module.exports = Gel;
-},{"gedi-paths":56,"lang-js":48,"spec-js":52}],48:[function(require,module,exports){
+},{"gedi-paths":64,"lang-js":56,"spec-js":60}],56:[function(require,module,exports){
 (function (process){
 var Token = require('./token');
 
@@ -8355,7 +8699,7 @@ Lang.Token = Token;
 
 module.exports = Lang;
 }).call(this,require("oMfpAn"))
-},{"./token":49,"oMfpAn":58}],49:[function(require,module,exports){
+},{"./token":57,"oMfpAn":66}],57:[function(require,module,exports){
 function Token(substring, length){
     this.original = substring;
     this.length = length;
@@ -8367,7 +8711,7 @@ Token.prototype.valueOf = function(){
 }
 
 module.exports = Token;
-},{}],50:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 // Copyright (C) 2011 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -9045,7 +9389,7 @@ module.exports = Token;
   }
 })();
 
-},{}],51:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 var Lang = require('lang-js'),
     Token = Lang.Token,
     paths = require('gedi-paths'),
@@ -9076,7 +9420,7 @@ module.exports = function(get, model){
 
     return PathToken;
 }
-},{"gedi-paths":56,"gedi-paths/detectPath":55,"lang-js":48,"spec-js":52}],52:[function(require,module,exports){
+},{"gedi-paths":64,"gedi-paths/detectPath":63,"lang-js":56,"spec-js":60}],60:[function(require,module,exports){
 Object.create = Object.create || function (o) {
     if (arguments.length > 1) {
         throw new Error('Object.create implementation only accepts the first parameter.');
@@ -9114,7 +9458,7 @@ function createSpec(child, parent){
 }
 
 module.exports = createSpec;
-},{}],53:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 /*
  * raf.js
  * https://github.com/ngryman/raf.js
@@ -9167,7 +9511,7 @@ module.exports = {
     requestAnimationFrame: requestAnimationFrame,
     cancelAnimationFrame: cancelAnimationFrame
 };
-},{}],54:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 var Gaffa = require('gaffa'),
     createSpec = require('spec-js');
 
@@ -9302,7 +9646,7 @@ TemplaterProperty.prototype.update =function (viewModel, value) {
 };
 
 module.exports = TemplaterProperty;
-},{"gaffa":40,"spec-js":52}],55:[function(require,module,exports){
+},{"gaffa":48,"spec-js":60}],63:[function(require,module,exports){
 module.exports = function detectPath(substring){
     if (substring.charAt(0) === '[') {
         var index = 1;
@@ -9321,7 +9665,7 @@ module.exports = function detectPath(substring){
         } while (index < substring.length);
     }
 };
-},{}],56:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 var detectPath = require('./detectPath');
 
 var pathSeparator = "/",
@@ -9591,7 +9935,7 @@ module.exports = {
         wildcard: pathWildcard
     }
 };
-},{"./detectPath":55}],57:[function(require,module,exports){
+},{"./detectPath":63}],65:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -9896,7 +10240,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],58:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -9961,28 +10305,11 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],59:[function(require,module,exports){
-function escapeHex(hex){
-    return String.fromCharCode(hex);
-}
-
-function createKey(number){
-    if(number + 0xE001 > 0xFFFF){
-        throw "Too many references. Log an issue on gihub an i'll add an order of magnatude to the keys.";
-    }
-    return escapeHex(number + 0xE001);
-}
-
-module.exports = createKey;
-},{}],60:[function(require,module,exports){
-var revive = require('./revive');
-
-function parse(json, reviver){
-    return revive(JSON.parse(json, reviver));
-}
-
-module.exports = parse;
-},{"./revive":61}],61:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
+module.exports=require(36)
+},{}],68:[function(require,module,exports){
+arguments[4][37][0].apply(exports,arguments)
+},{"./revive":69}],69:[function(require,module,exports){
 var createKey = require('./createKey'),
     keyKey = createKey(-1);
 
@@ -10041,66 +10368,8 @@ function revive(input){
 }
 
 module.exports = revive;
-},{"./createKey":59}],62:[function(require,module,exports){
-module.exports = {
-    stringify: require('./stringify'),
-    parse: require('./parse'),
-    revive: require('./revive')
-};
-},{"./parse":60,"./revive":61,"./stringify":63}],63:[function(require,module,exports){
-var createKey = require('./createKey'),
-    keyKey = createKey(-1);
-
-function toJsonValue(value){
-    if(value != null && typeof value === 'object'){
-        var result = value instanceof Array ? [] : {},
-            output = value;
-        if('toJSON' in value){
-            output = value.toJSON();
-        }
-        for(var key in output){
-            result[key] = output[key];
-        }
-        return result;
-    }
-
-    return value;
-}
-
-function stringify(input, replacer, spacer){
-    var objects = [],
-        outputObjects = [],
-        refs = [];
-
-    function scan(input){
-
-        if(input === null || typeof input !== 'object'){
-            return input;
-        }
-
-        var output,
-            index = objects.indexOf(input);
-
-        if(index >= 0){
-            outputObjects[index][keyKey] = refs[index]
-            return refs[index];
-        }
-
-        index = objects.length;
-        objects[index] = input;
-        output = toJsonValue(input);
-        outputObjects[index] = output;
-        refs[index] = createKey(index);
-
-        for(var key in output){
-            output[key] = scan(output[key]);
-        }
-
-        return output;
-    }
-
-    return JSON.stringify(scan(input), replacer, spacer);
-}
-
-module.exports = stringify;
-},{"./createKey":59}]},{},[4])
+},{"./createKey":67}],70:[function(require,module,exports){
+arguments[4][39][0].apply(exports,arguments)
+},{"./parse":68,"./revive":69,"./stringify":71}],71:[function(require,module,exports){
+module.exports=require(40)
+},{"./createKey":67}]},{},[4])

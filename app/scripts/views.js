@@ -12,6 +12,7 @@ module.exports = function(gaffa){
         Image : require('gaffa-image'),
         Html : require('gaffa-html'),
         Textbox : require('gaffa-textbox'),
+        Textarea : require('gaffa-textarea'),
         Checkbox : require('gaffa-checkbox'),
         Radio : require('gaffa-radio'),
         Select : require('gaffa-select'),
