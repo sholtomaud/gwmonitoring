@@ -6,7 +6,7 @@
     "url": "https://github.com/shotlom/gwmonitoring.git"
   },
   "dependencies": {
-    "gaffa": "^1.4.0",
+    "gaffa": "^1.x.x",
     "gaffa-textarea": "^1.0.0",
     "gaffa-checkbox": "^1.0.0",
     "gaffa-container": "^1.0.0",
