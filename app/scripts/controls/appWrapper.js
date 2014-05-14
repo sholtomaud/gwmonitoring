@@ -7,11 +7,13 @@ module.exports = function(app){
   
   var SiteIDLabel = new views.Label();
   var SiteIDTextbox = new views.Textbox();
-  SiteIDTextbox.value.binding = '[SITE_STATION]'
+  SiteIDTextbox.value.binding = '[siteID]'
   SiteIDTextbox.size.value = 20;
   SiteIDLabel.text.value = 'Site ID';
   SiteIDTextbox.maxLength.value = 18;
   SiteIDLabel.classes.value = 'fldname';
+
+
 
   SiteIDTextbox.classes.value = 'inp';
   SiteIDTextbox.required.value = true;
@@ -26,7 +28,10 @@ module.exports = function(app){
   SiteIDLabelContainer.classes.value = 'field'
   var JobNameLabel = new views.Label();
   var JobNameTextbox = new views.Textbox();
-  JobNameTextbox.value.binding = '[AREASMT_ASSTYPE]'
+  JobNameTextbox.value.binding = '[jobName]'
+  
+
+
   JobNameTextbox.size.value = 7;
   JobNameLabel.text.value = 'Job Name';
   JobNameTextbox.maxLength.value = 5;
@@ -41,14 +46,16 @@ module.exports = function(app){
   ]);
 
   JobNameLabelContainer.classes.value = 'field'
+  
   var BasinLabel = new views.Label();
   var BasinSelect = new views.Select();
-  BasinSelect.value.binding = '[SITE_CATEGORY1]'
+  BasinSelect.value.binding = '[basin]'
   BasinSelect.options.value = [''];
   BasinLabel.text.value = 'Basin';
   BasinLabel.classes.value = 'fldname';
 
   BasinSelect.classes.value = 'inp';
+
 
   var BasinLabelContainer = new views.Container();
   BasinLabelContainer.views.content.add([
@@ -59,7 +66,7 @@ module.exports = function(app){
   BasinLabelContainer.classes.value = 'field'
   var WellfieldLabel = new views.Label();
   var WellfieldSelect = new views.Select();
-  WellfieldSelect.value.binding = '[SITE_CATEGORY2]'
+  WellfieldSelect.value.binding = '[wellField]'
   WellfieldSelect.options.value = [''];
   WellfieldLabel.text.value = 'Wellfield';
   WellfieldLabel.classes.value = 'fldname';
@@ -72,10 +79,11 @@ module.exports = function(app){
     WellfieldSelect,
   ]);
 
-  WellfieldLabelContainer.classes.value = 'field'
+  WellfieldLabelContainer.classes.value = 'field';
+
   var RecordedByLabel = new views.Label();
   var RecordedBySelect = new views.Select();
-  RecordedBySelect.value.binding = '[AREASMT_ASSOFFICER]'
+  RecordedBySelect.value.binding = '[officer]'
   RecordedBySelect.options.value = ['CTJONES','RHECTOR','SDENNER'];
   RecordedByLabel.text.value = 'Recorded By';
   
@@ -90,12 +98,11 @@ module.exports = function(app){
   ]);
 
   RecordedByLabelContainer.classes.value = 'field';
-  
-  
+    
   var DateLabel = new views.Label();
   var DateDate = new views.Textbox();
   DateDate.type.value = 'date'
-  DateDate.value.binding = '[AREASMT_DATE|HYDMEAS_DATE|PUMPTEST_TESTDATE|PUMPREAD_TESTDATE|SAMPLES_DATE|SAMPLES_DATE]'
+  DateDate.value.binding = '[visitDate]'
   DateLabel.text.value = 'Field Visit Date';
   DateLabel.classes.value = 'fldname';
 
@@ -108,11 +115,11 @@ module.exports = function(app){
   ]);
 
   DateLabelContainer.classes.value = 'field';
-  
-  
+
+
   var TimeLabel = new views.Label();
   var TimeTextbox = new views.Textbox();
-  TimeTextbox.value.binding = '[STNVISIT_STARTTIME]'
+  TimeTextbox.value.binding = '[visitTime]'
   TimeTextbox.size.value = 6;
   TimeLabel.text.value = 'Time';
   TimeTextbox.maxLength.value = 4;
@@ -131,10 +138,13 @@ module.exports = function(app){
     TimePostLabel,
   ]);
 
-  TimeLabelContainer.classes.value = 'field'
+  TimeLabelContainer.classes.value = 'field';
+
+
+
   var FreeGasReadingMethaneLabel = new views.Label();
   var FreeGasReadingMethaneTextbox = new views.Textbox();
-  FreeGasReadingMethaneTextbox.value.binding = '[RESULTS_VALUE|RESULTS_VARIABLE~1011]'
+  FreeGasReadingMethaneTextbox.value.binding = '[freeGas]'
   FreeGasReadingMethaneTextbox.size.value = 17;
   FreeGasReadingMethaneLabel.text.value = 'Free Gas Reading (Methane)';
   FreeGasReadingMethaneTextbox.maxLength.value = 15;
@@ -154,6 +164,8 @@ module.exports = function(app){
   ]);
 
   FreeGasReadingMethaneLabelContainer.classes.value = 'field'
+
+
   
   var WellTypeLabel = new views.Label();
   WellTypeLabel.text.value = 'Well Type';
@@ -161,8 +173,7 @@ module.exports = function(app){
   
   var WellTypeSelect = new views.Select();
   WellTypeSelect.classes.value = 'inp';
-  WellTypeSelect.value.binding = '[SITE_STNTYPE]'
-  WellTypeSelect.options.label = ['Monitoring','Extraction','Other'];
+  WellTypeSelect.value.binding = '[wellType]'
   WellTypeSelect.options.value = ['Monitoring','Extraction','Other'];
    
   var WellTypeLabelContainer = new views.Container();
@@ -177,8 +188,7 @@ module.exports = function(app){
 
   var WellMaterialSelect = new views.Select();
   WellMaterialSelect.classes.value = 'inp';
-  WellMaterialSelect.value.binding = '[CASING_CASETYPE]'
-  WellMaterialSelect.options.label = ['PVC','Steel','Other'];
+  WellMaterialSelect.value.binding = '[wellMaterial]'
   WellMaterialSelect.options.value = ['PVC','Steel','Other'];
     
   var WellMaterialLabelContainer = new views.Container();
@@ -187,6 +197,7 @@ module.exports = function(app){
     WellMaterialSelect
   ]);
 
+  
   var PurgeSetupLabel = new views.Label();
   PurgeSetupLabel.text.value = 'Purge Setup';
   PurgeSetupLabel.classes.value = 'head3';
@@ -196,10 +207,11 @@ module.exports = function(app){
     PurgeSetupLabel,
   ]);
 
-  PurgeSetupLabelContainer.classes.value = 'field'
+  PurgeSetupLabelContainer.classes.value = 'field';
+
   var WellHeadConditionLabel = new views.Label();
   var WellHeadConditionTextbox = new views.Textbox();
-  WellHeadConditionTextbox.value.binding = '[HYDRLMP_COMMENT]'
+  WellHeadConditionTextbox.value.binding = '[wellHeadCondition]'
   WellHeadConditionTextbox.size.value = 32;
   WellHeadConditionLabel.text.value = 'Well Head Condition';
   WellHeadConditionTextbox.maxLength.value = 60;
@@ -213,10 +225,11 @@ module.exports = function(app){
     WellHeadConditionTextbox,
   ]);
 
-  WellHeadConditionLabelContainer.classes.value = 'field'
+  WellHeadConditionLabelContainer.classes.value = 'field';
+
   var WaterLevelDepthLabel = new views.Label();
   var WaterLevelDepthTextbox = new views.Textbox();
-  WaterLevelDepthTextbox.value.binding = '[HYDMEAS_VALUE|HYDMEAS_VARIABLE~110 ]'
+  WaterLevelDepthTextbox.value.binding = '[waterLevel]'
   WaterLevelDepthTextbox.size.value = 12;
   WaterLevelDepthLabel.text.value = 'Water Level Depth ';
   WaterLevelDepthTextbox.maxLength.value = 15;
@@ -225,7 +238,6 @@ module.exports = function(app){
   WaterLevelDepthPostLabel.classes.value = 'postlab';
 
   WaterLevelDepthLabel.classes.value = 'fldname';
-
   WaterLevelDepthTextbox.classes.value = 'inp';
 
   var WaterLevelDepthLabelContainer = new views.Container();
@@ -234,28 +246,29 @@ module.exports = function(app){
     WaterLevelDepthTextbox,
     WaterLevelDepthPostLabel,
   ]);
+  WaterLevelDepthLabelContainer.classes.value = 'field';
 
-  WaterLevelDepthLabelContainer.classes.value = 'field'
   var MeasurementPointDescriptionLabel = new views.Label();
   var MeasurementPointDescriptionTextbox = new views.Textbox();
-  MeasurementPointDescriptionTextbox.value.binding = '[HYDRLMP_MEASPTDESC]'
+  MeasurementPointDescriptionTextbox.value.binding = '[measPointDesc]'
   MeasurementPointDescriptionTextbox.size.value = 62;
   MeasurementPointDescriptionLabel.text.value = 'Measurement Point Description';
   MeasurementPointDescriptionTextbox.maxLength.value = 60;
   MeasurementPointDescriptionLabel.classes.value = 'fldname';
 
   MeasurementPointDescriptionTextbox.classes.value = 'inp';
-
+  
   var MeasurementPointDescriptionLabelContainer = new views.Container();
   MeasurementPointDescriptionLabelContainer.views.content.add([
     MeasurementPointDescriptionLabel,
     MeasurementPointDescriptionTextbox,
   ]);
 
-  MeasurementPointDescriptionLabelContainer.classes.value = 'field'
+  MeasurementPointDescriptionLabelContainer.classes.value = 'field';
+
   var TotalDepthofWellLabel = new views.Label();
   var TotalDepthofWellTextbox = new views.Textbox();
-  TotalDepthofWellTextbox.value.binding = '[GWHOLE_DEPTHDRILL]'
+  TotalDepthofWellTextbox.value.binding = '[totalDepth]'
   TotalDepthofWellLabel.text.value = 'Total Depth of Well ';
   var TotalDepthofWellPostLabel = new views.Label();
   TotalDepthofWellPostLabel.text.value = '(TD in m BTOC)';
@@ -271,11 +284,11 @@ module.exports = function(app){
     TotalDepthofWellTextbox,
     TotalDepthofWellPostLabel,
   ]);
-
+ 
   TotalDepthofWellLabelContainer.classes.value = 'field'
   var WellDiameterLabel = new views.Label();
   var WellDiameterTextbox = new views.Textbox();
-  WellDiameterTextbox.value.binding = '[CASING_OUTDIAM|CASING_DEPTHFROM=0_00]'
+  WellDiameterTextbox.value.binding = '[wellDiam]'
   WellDiameterTextbox.size.value = 17;
   WellDiameterLabel.text.value = 'Well Diameter ';
   WellDiameterTextbox.maxLength.value = 15;
@@ -284,7 +297,6 @@ module.exports = function(app){
   WellDiameterPostLabel.classes.value = 'postlab';
 
   WellDiameterLabel.classes.value = 'fldname';
-
   WellDiameterTextbox.classes.value = 'inp';
 
   var WellDiameterLabelContainer = new views.Container();
@@ -296,21 +308,23 @@ module.exports = function(app){
 
   WellDiameterLabelContainer.classes.value = 'field'
   
+
   var BailerTypeLabel = new views.Label();
   BailerTypeLabel.text.value = 'Bailer Type';
   BailerTypeLabel.classes.value = 'fldname';
 
-  var BailerTypeRadio = new views.Select();
-  BailerTypeRadio.classes.value = 'inp';
-  BailerTypeRadio.value.binding = '[PUMPTTEST_COMMENTS~BailerType]'
-  BailerTypeRadio.options.label = ['PVC','Steel','Teflon','Other'];
-  BailerTypeRadio.options.value = ['PVC','Steel','Teflon','Other'];
-    
+  var BailerTypeSelect = new views.Select();
+  BailerTypeSelect.classes.value = 'inp';
+  BailerTypeSelect.value.binding = '[bailerType]'
+  BailerTypeSelect.options.value = ['PVC','Steel','Teflon','Other'];
+
+
   var BailerTypeLabelContainer = new views.Container();
   BailerTypeLabelContainer.views.content.add([
     BailerTypeLabel,
-    BailerTypeRadio
+    BailerTypeSelect
   ]);
+
 
   var PumpTypeLabel = new views.Label();
   PumpTypeLabel.text.value = 'Pump Type';
@@ -318,8 +332,7 @@ module.exports = function(app){
 
   var PumpTypeSelect = new views.Select();
   PumpTypeSelect.classes.value = 'inp';
-  PumpTypeSelect.value.binding = '[PUMPTTEST_COMMENTS~PumpType]'
-  PumpTypeSelect.options.label = ['Submersible','Bladder','Other'];
+  PumpTypeSelect.value.binding = '[pumpType]'
   PumpTypeSelect.options.value = ['Submersible','Bladder','Other'];
     
   var PumpTypeLabelContainer = new views.Container();
@@ -918,6 +931,22 @@ function createControls(){
     newRecordButton.actions.click = [enableForm];
 
     //saveRecord.source.binding = '(object "record" (? (filter [] {fields fields.value}) (filter [/ui] {fields fields.table_field}) ) )';
+    //// returns a list of all todos that match the current filter.
+//var todosInViewBinding = '(? (= [/filter] "all") [/todos] (? (= [/filter] "completed") (filter [/todos] {todo todo.completed}) (filter [/todos] {todo (! todo.completed)})))';
+/*
+filters:[
+        {
+            label: "All",
+            filter: 'all'
+        },
+        {
+            label: "Active",
+            filter: 'active'
+        },
+        {
+*/  
+
+
     saveRecord.source.binding = '[form]';
     saveRecord.target.binding = '[/records]';
     
