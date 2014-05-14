@@ -5,11 +5,10 @@ body,
 }
 body {
   font: 9px;
-  margin: 10px;
   padding: 5px;
-  font-family: Arial;
-  color: #484848;
-  background-color: #f7f7f7;
+  background-color: #e0e0e0;
+  overflow: hidden;
+  height: 89%;
 }
 .app {
   min-height: 100%;
@@ -26,14 +25,13 @@ body {
   height: 100%;
 }
 .form {
-  background: linear-gradient(top, #fff, #f8f8f8);
   border: 1px solid #d0d2d5;
-  border-bottom: 1px solid #bebfc2;
-  border-radius: 4px;
-  margin: 0 0 20px 0;
-  padding: 20px;
+  margin-bottom: 10px;
   display: block;
-  width: 50%;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  padding: 10px;
 }
 .headlong {
   padding: 1px 2px 2px;
@@ -49,6 +47,7 @@ body {
   padding: 1px 2px 2px;
   text-align: left;
   font-size: 0.7em;
+  font-family: arial;
 }
 .field {
   padding: 1px 2px;
@@ -59,8 +58,14 @@ body {
   font-weight: bold;
   border-bottom: 1px solid #bebfc2;
   padding-bottom: 3px;
-  margin-bottom: 18px;
   display: block;
+}
+.controls {
+  border-bottom: 1px solid #bebfc2;
+  margin-bottom: 3px;
+  display: block;
+  padding-bottom: 3px;
+  padding-top: 3px;
 }
 .head2 {
   margin-top: 14px;
@@ -85,7 +90,12 @@ body {
   width: 150px;
   padding: 4px;
 }
-.inp select {
+.inp {
+  font-family: Consolas;
+  editable: true;
+  display: inline-block;
+}
+select {
   font-family: Consolas;
   editable: true;
   display: inline-block;

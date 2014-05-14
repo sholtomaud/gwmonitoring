@@ -56,11 +56,18 @@ gulp.task('build', function() {
                         return;
                     }
 
+                    /*
+                    ** We don't currently need to build the page for the purposes of Hydstra Forms.
+                    ** This will be implemented in the future when Drag and Drop functionality becomes a reality
+                    ** 
                     fs.writeFile('./app/build/pages/' + parts[0] + '.json', viewbuilder('./app/scripts/pages/' + file), function(){
                         if(error){
                             console.error(error);
                         }
                     });
+                    */
+                    
+                    
                 });
             });
         });
@@ -69,7 +76,7 @@ gulp.task('build', function() {
 gulp.task('watch', function () {
    gulp.watch(['./app/styles/**/*.styl'], ['styles']);
    gulp.watch(['./app/scripts/**/*.js'], ['build']);
-   gulp.watch(['./build/pages/aquifer.json'], ['build']);
+   //gulp.watch(['./build/pages/aquifer.json'], ['build']);
 });
 
 

@@ -38,16 +38,6 @@ module.exports = function(app){
         behaviours = app.behaviours;
 
  function createForm(){
-  var GroundWaterMonitoringFormLabelContainer = new views.Label();
-  GroundWaterMonitoringFormLabelContainer.classes.value = 'title';
-  GroundWaterMonitoringFormLabelContainer.text.value = 'Ground Water Monitoring Form';
- 
-  //var GroundWaterMonitoringFormLabelContainer = new views.Container();
-  //GroundWaterMonitoringFormLabelContainer.views.content.add([
-  //  GroundWaterMonitoringFormLabel
-  //]);
-
-  //GroundWaterMonitoringFormLabelContainer.classes.value = 'field'
   
   var SiteIDLabel = new views.Label();
   var SiteIDTextbox = new views.Textbox();
@@ -133,12 +123,14 @@ module.exports = function(app){
     RecordedBySelect,
   ]);
 
-  RecordedByLabelContainer.classes.value = 'field'
+  RecordedByLabelContainer.classes.value = 'field';
+  
+  
   var DateLabel = new views.Label();
   var DateDate = new views.Textbox();
   DateDate.type.value = 'date'
   DateDate.value.binding = '[AREASMT_DATE|HYDMEAS_DATE|PUMPTEST_TESTDATE|PUMPREAD_TESTDATE|SAMPLES_DATE|SAMPLES_DATE]'
-  DateLabel.text.value = 'Date';
+  DateLabel.text.value = 'Field Visit Date';
   DateLabel.classes.value = 'fldname';
 
   DateDate.classes.value = 'inp';
@@ -149,7 +141,9 @@ module.exports = function(app){
     DateDate,
   ]);
 
-  DateLabelContainer.classes.value = 'field'
+  DateLabelContainer.classes.value = 'field';
+  
+  
   var TimeLabel = new views.Label();
   var TimeTextbox = new views.Textbox();
   TimeTextbox.value.binding = '[STNVISIT_STARTTIME]'
@@ -662,7 +656,18 @@ module.exports = function(app){
     MeasurementCommentsTextarea,
   ]);
 
-  MeasurementCommentsLabelContainer.classes.value = 'field'
+  MeasurementCommentsLabelContainer.classes.value = 'field';
+  
+  var DischargeLabel = new views.Label();
+  DischargeLabel.text.value = 'Discharge';
+  DischargeLabel.classes.value = 'head3';
+
+  var DischargeLabelContainer = new views.Container();
+  DischargeLabelContainer.views.content.add([
+    DischargeLabel,
+  ]);
+  DischargeLabelContainer.classes.value = 'field';
+      
   var DischargewaterdisposalLabel = new views.Label();
   var DischargewaterdisposalLabel = new views.Label();
   DischargewaterdisposalLabel.text.value = 'Discharge water disposal';
@@ -727,7 +732,7 @@ module.exports = function(app){
   SamplingMethodLabel.classes.value = 'fldname';
 
   var SamplingMethodSelect = new views.Select();
-  SamplingMethodSelect.value.binding = '[SAMPLES_COLLMETH]';
+  SamplingMethodSelect.value.binding = '[SAMPLES_COLLMETH,SAMPLES_TEST]';
   SamplingMethodSelect.options.value = ['AI','AS','PA'];
   SamplingMethodSelect.classes.value = 'inp';
 
@@ -754,7 +759,7 @@ module.exports = function(app){
     BOTTLENUMBERTextbox,
   ]);
 
-  BOTTLENUMBERLabelContainer.classes.value = 'field'
+  BOTTLENUMBERLabelContainer.classes.value = 'field';
   var SAMPLENUMBERLabel = new views.Label();
   var SAMPLENUMBERTextbox = new views.Textbox();
   SAMPLENUMBERTextbox.value.binding = '[SAMPLES_SAMPNUM]';
@@ -819,14 +824,15 @@ module.exports = function(app){
     SampleCommentTextarea,
   ]);
   
-  SampleCommentLabelContainer.classes.value = 'field'
+  SampleCommentLabelContainer.classes.value = 'field';
+  
    var formTemplate = new views.Container();
+    formTemplate.classes.value = 'form';
     formTemplate.views.content.add([
-      GroundWaterMonitoringFormLabelContainer,
       SiteIDLabelContainer,
       JobNameLabelContainer,
-      BasinLabelContainer,
-      WellfieldLabelContainer,
+      //BasinLabelContainer,
+      //WellfieldLabelContainer,
       RecordedByLabelContainer,
       DateLabelContainer,
       TimeLabelContainer,
@@ -855,6 +861,7 @@ module.exports = function(app){
       TempLabelContainer,
       TurbidityLabelContainer,
       MeasurementCommentsLabelContainer,
+      DischargeLabelContainer,
       DischargewaterdisposalLabelContainer,
       OtherCommentLabelContainer,
       WellSamplingLabelContainer,
@@ -866,18 +873,132 @@ module.exports = function(app){
       SampleTypeLabelContainer,
       SampleCommentLabelContainer
     ]);
-  formTemplate.path = '[/form]';
+    formTemplate.path = '[/form]';
+
+    
     return formTemplate;
-  }
-function createView(){
-var appView = new views.Container();
-appView.views.content.add([
-  createForm(),
-]);
-appView.classes.value = 'app';
-return appView;
 }
-return createView;
+
+function formActions(){    
+    
+    var pushNewUser = new actions.Push();
+    pushNewUser.source.binding = '[/form]'; //data is in scope from ajax action success
+    pushNewUser.target.binding = '[/data]';
+    
+    //var alert = new actions.Alert();
+    //alert.text.value = 'Saved';
+
+    var submitButton = new views.Button();
+    submitButton.text.value = 'Submit';
+    submitButton.actions.click = [pushNewUser];
+
+    return submitButton;
+    
+    var clearNewUser = new actions.Remove();
+    clearNewUser.target.binding = '[]';
+
+    var saveData = new actions.Ajax();
+    //saveUser.method.value = 'POST';
+    saveData.source.binding = '[]';
+    saveData.actions.success = [pushNewUser, clearNewUser];  
+    
+    var form = new views.Form();
+    form.path = '[/formData]';
+    form.views.content.add([
+        createControls(),
+        formTemplate, 
+        submitButton
+    ]);
+    form.actions.submit = [pushNewUser];
+    
+    return form;  
+}         
+
+function createControls(){
+  var controlsTemplate = new views.Container(),
+      backButton = new views.Button(),
+      newRecordButton = new views.Button(),
+      editRecordButton = new views.Button(),
+      cancelButton = new views.Button(),
+      saveRecordButton = new views.Button(),
+      nextButton = new views.Button(),
+      searchBox = new views.Textbox(),
+      deleteRecordButton = new views.Button(),
+      enableForm = new actions.Set(),
+      disableForm = new actions.Set(),
+      addNewRecord = new actions.Push(),
+      saveRecord = new actions.Push(),
+      saveExport = new actions.Push(),
+      addRecordIfNotEmpty = new actions.Conditional(),
+      clearNewRecord = new actions.Remove();
+
+
+    backButton.text.value = '<- Back';
+    newRecordButton.text.value = 'New Record';
+    editRecordButton.text.value = 'Edit';
+    cancelButton.text.value = 'Cancel';
+    saveRecordButton.text.value = 'Save';
+    nextButton.text.value = 'Next ->';
+    searchBox.placeholder.value = 'Search...';
+    deleteRecordButton.text.value = 'Delete';
+
+    enableForm.source.value = 'true' ;
+    enableForm.target.binding = '[/fieldsEnabled]';
+
+    disableForm.source.value = 'false' ;
+    disableForm.target.binding = '[/fieldsEnabled]';
+
+    editRecordButton.actions.click = [enableForm];
+    newRecordButton.actions.click = [enableForm];
+
+    //saveRecord.source.binding = '(object "record" (? (filter [] {fields fields.value}) (filter [/ui] {fields fields.table_field}) ) )';
+    saveRecord.source.binding = '[form]';
+    saveRecord.target.binding = '[/records]';
+    
+    saveRecord.source.binding = '(object "records" (? (filter [] {SITE_STATION} )))';
+    saveExport.target.binding =  '[/export]';
+
+    cancelButton.actions.click = [disableForm];
+    saveRecordButton.actions.click = [saveRecord,saveExport,disableForm];
+
+    controlsTemplate.views.content.add([
+        newRecordButton,
+        editRecordButton,
+        saveRecordButton,
+        //backButton,
+        //nextButton,
+        cancelButton
+        //searchBox,
+        //deleteRecordButton
+    ]);
+
+    controlsTemplate.classes.value = 'controls';
+    return controlsTemplate;
+
+}
+ 
+function createTitle(){
+  var formTitle = new views.Label();
+  formTitle.classes.value = 'title';
+  formTitle.text.value = 'Ground Water Monitoring Form';
+  return formTitle;
+}
+ 
+function createView(){
+    
+    var appView = new views.Container();
+    appView.views.content.add([
+      createTitle(),
+      createControls(),
+      createForm()
+    ]);
+    
+    appView.classes.value = 'app';
+    return appView;
+    
+}
+
+  return createView;
 }
 },{}],4:[function(require,module,exports){
 /*------------------------------------------------------------------------------------------------------------------------
@@ -3159,13 +3280,6 @@ Textbox.prototype.size = new Gaffa.Property(function(view, value){
     }
 });
 
-Textbox.prototype.required = new Gaffa.Property(function(view, value){
-    if(value != null){
-        view.formElement.setAttribute('required',value);
-    }else{
-        view.formElement.removeAttribute('required');
-    }
-});
 
 module.exports = Textbox;
 },{"gaffa":48,"gaffa-formelement":45}],47:[function(require,module,exports){
