@@ -1011,14 +1011,14 @@ function createControls(){
     //// returns a list of all todos that match the current filter.
 //var todosInViewBinding = '(? (= [/filter] "all") [/todos] (? (= [/filter] "completed") (filter [/todos] {todo todo.completed}) (filter [/todos] {todo (! todo.completed)})))';
 
-    saveRecord.source.binding = '[data]';
+    saveRecord.source.binding = '[form]';
     saveRecord.target.binding = '[/records]';
     
-    //saveRecord.source.binding = '(object "records" (? (filter [] {SITE_STATION} )))';
-    //saveExport.target.binding =  '[/export]';
+    saveRecord.source.binding = '(object "records" (? (filter [] {SITE_STATION} )))';
+    saveExport.target.binding =  '[/export]';
 
     cancelButton.actions.click = [disableForm];
-    saveRecordButton.actions.click = [saveRecord,disableForm];
+    saveRecordButton.actions.click = [saveRecord,saveExport,disableForm];
 
     controlsTemplate.views.content.add([
         newRecordButton,

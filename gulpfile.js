@@ -16,13 +16,15 @@ gulp.task('styles', function() {
         .pipe(concat('./public/styles/main.css'))
         .pipe(gulp.dest('./public/styles'));
     */
-
+//.pipe(concat('../../public/build/app.browser.js'))
+        
     gulp.src('./app/styles/styles.styl')
         .pipe(stylus({
             compress: true
         }))
-        .pipe(concat('./app/styles/main.css'))
-        .pipe(gulp.dest('./'));
+        //.pipe(concat('./app/styles/main.css'))
+        .pipe(concat('../../public/styles/index.css'))
+        .pipe(gulp.dest('./public/styles'));
 });
 
 gulp.task('build', function() {
@@ -73,6 +75,37 @@ gulp.task('build', function() {
         });
 });
 
+
+gulp.task('build2', function() {
+    gulp.src(['./app/scripts/app.js'])
+        .pipe(browserify({
+          debug : false
+        }))
+
+        // Comment this line out for development
+        //.pipe(minify())
+
+        .pipe(concat('../../public/build/app.browser.js'))
+        .pipe(gulp.dest('./app/scripts'))
+        .on('end', function(){
+            fs.readdir('./app/scripts/pages', function(error, files){
+                if(error){
+                    console.error(error);
+                    return;
+                }
+
+                // Remove all cached modules before building.
+                for(var key in require.cache){
+                    if(key.indexOf(__dirname + '/app') === 0){
+                        delete require.cache[key];
+                    }
+                }
+            });
+        });
+});
+
+
+
 gulp.task('watch', function () {
    gulp.watch(['./app/styles/**/*.styl'], ['styles']);
    gulp.watch(['./app/scripts/**/*.js'], ['build']);
@@ -88,5 +121,5 @@ gulp.task('connect', function() {
   });
 });
 
-
-gulp.task('default', ['watch', 'styles', 'build','connect']);
+gulp.task('default', ['watch', 'styles', 'build2','connect']);
+//gulp.task('default', ['styles', 'build2',]);

@@ -90,9 +90,10 @@ body
    
 .inp 
   font-family Consolas
-  editable: true
   display inline-block
 
+  
+  
 select  
   font-family Consolas
   editable: true
@@ -108,16 +109,33 @@ select
   text-align left
   font 12px Arial
   display inline-block
+
+textarea:enabled, input:enabled
+  background-color white
+  border 1px solid grey
+
+textarea:disabled
+  background-color silver
+  border 1px solid grey
   
-input:enabled
-  color black
-
 input:disabled
-  color silver
+  background-color silver
+  border 1px solid grey
 
+select:enabled
+  background-color white
+  border 1px solid grey  
+  
+select:disabled
+  background-color silver
+  border 1px solid grey
+
+
+  
 .enabled
   background-color white
   color black
+  
 
 .key
   border 1px solid  #FF9999

@@ -5,6 +5,8 @@
     "type": "git",
     "url": "https://github.com/shotlom/gwmonitoring.git"
   },
+  "author": "sholto maud <shotlo.maud@gmail.com>",
+  "license": "BSD",
   "dependencies": {
     "gaffa": "^1.x.x",
     "gaffa-textarea": "^1.0.0",
@@ -40,10 +42,16 @@
     "gaffa-conditional": "^1.0.0",
     "gaffa-browser-storage": "^1.0.0",
     "gaffa-model-change": "^1.0.0",
-    "crel": "^1.1.1",
+    "beeline": "0.1.x",
+    "flaps": "0.0.12",
+    "route-tree": "^1.0.0",
+    "crel": "^1.1.x",
     "doc-js": "^0.4.7",
     "gaffa-page-load": "^1.0.0",
-    "gedi-paths": "^0.4.11"
+    "gedi-paths": "^0.4.11",
+    "retort": "0.0.x",
+    "venfix": "0.0.X",
+    "request-data": "^0.0.x"
   },
   "devDependencies": {
     "stylus": "^0.42.2",
@@ -56,6 +64,10 @@
     "gaffa-pagebuilder": "0.0.2",
     "statham": "^1.0.0",
     "gaffa-viewbuilder": "~0.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server"
   },
   "engines": {
     "node": "X.X.X",
