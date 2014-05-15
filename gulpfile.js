@@ -86,7 +86,7 @@ gulp.task('build2', function() {
         //.pipe(minify())
 
         .pipe(concat('../../public/build/app.browser.js'))
-        .pipe(gulp.dest('./app/scripts'))
+        .pipe(gulp.dest('./public/build'))
         .on('end', function(){
             fs.readdir('./app/scripts/pages', function(error, files){
                 if(error){

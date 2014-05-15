@@ -46,6 +46,14 @@ module.exports = function(app){
   SiteIDLabel.text.value = 'Site ID';
   SiteIDTextbox.maxLength.value = 18;
   SiteIDLabel.classes.value = 'fldname';
+
+
+
+
+
+  SiteIDTextbox.classes.value = 'inp';
+  SiteIDTextbox.required.value = true;
+
   
   SiteIDTextbox.disabled.binding = '[/fieldsEnabled]';
   
@@ -64,7 +72,11 @@ module.exports = function(app){
   var JobNameTextbox = new views.Textbox();
   JobNameTextbox.value.binding = '[jobName]'
   
+
   JobNameTextbox.disabled.binding = '[/fieldsEnabled]';
+
+
+
 
   JobNameTextbox.size.value = 7;
   JobNameLabel.text.value = 'Job Name';
@@ -271,8 +283,11 @@ module.exports = function(app){
 
   var WaterLevelDepthLabel = new views.Label();
   var WaterLevelDepthTextbox = new views.Textbox();
+
   WaterLevelDepthTextbox.disabled.binding = '[/fieldsEnabled]';
   
+
+
   WaterLevelDepthTextbox.value.binding = '[waterLevel]'
   WaterLevelDepthTextbox.size.value = 12;
   WaterLevelDepthLabel.text.value = 'Water Level Depth ';
@@ -294,8 +309,11 @@ module.exports = function(app){
 
   var MeasurementPointDescriptionLabel = new views.Label();
   var MeasurementPointDescriptionTextbox = new views.Textbox();
+
   MeasurementPointDescriptionTextbox.disabled.binding = '[/fieldsEnabled]';
   
+
+
   MeasurementPointDescriptionTextbox.value.binding = '[measPointDesc]'
   MeasurementPointDescriptionTextbox.size.value = 62;
   MeasurementPointDescriptionLabel.text.value = 'Measurement Point Description';
@@ -314,8 +332,11 @@ module.exports = function(app){
 
   var TotalDepthofWellLabel = new views.Label();
   var TotalDepthofWellTextbox = new views.Textbox();
+
   TotalDepthofWellTextbox.disabled.binding = '[/fieldsEnabled]';
   
+
+
   TotalDepthofWellTextbox.value.binding = '[totalDepth]'
   TotalDepthofWellLabel.text.value = 'Total Depth of Well ';
   var TotalDepthofWellPostLabel = new views.Label();
@@ -336,7 +357,10 @@ module.exports = function(app){
   TotalDepthofWellLabelContainer.classes.value = 'field'
   var WellDiameterLabel = new views.Label();
   var WellDiameterTextbox = new views.Textbox();
+
   WellDiameterTextbox.disabled.binding = '[/fieldsEnabled]';
+
+
   WellDiameterTextbox.value.binding = '[wellDiam]'
   WellDiameterTextbox.size.value = 17;
   WellDiameterLabel.text.value = 'Well Diameter ';
@@ -1011,14 +1035,32 @@ function createControls(){
     //// returns a list of all todos that match the current filter.
 //var todosInViewBinding = '(? (= [/filter] "all") [/todos] (? (= [/filter] "completed") (filter [/todos] {todo todo.completed}) (filter [/todos] {todo (! todo.completed)})))';
 
+
+    saveRecord.source.binding = '[data]';
+
+/*
+filters:[
+        {
+            label: "All",
+            filter: 'all'
+        },
+        {
+            label: "Active",
+            filter: 'active'
+        },
+        {
+*/  
+
+
     saveRecord.source.binding = '[form]';
+
     saveRecord.target.binding = '[/records]';
     
-    saveRecord.source.binding = '(object "records" (? (filter [] {SITE_STATION} )))';
-    saveExport.target.binding =  '[/export]';
+    //saveRecord.source.binding = '(object "records" (? (filter [] {SITE_STATION} )))';
+    //saveExport.target.binding =  '[/export]';
 
     cancelButton.actions.click = [disableForm];
-    saveRecordButton.actions.click = [saveRecord,saveExport,disableForm];
+    saveRecordButton.actions.click = [saveRecord,disableForm];
 
     controlsTemplate.views.content.add([
         newRecordButton,
@@ -3171,16 +3213,6 @@ Select.prototype.required = new Gaffa.Property(function(view, value){
     }
 });
 
-
-Select.prototype.disabled = new Gaffa.Property(function(view, value){
-    if(value != null && value=='true'){
-        view.renderedElement.setAttribute('disabled', value);
-    }else{
-        view.renderedElement.removeAttribute('disabled');
-    }
-});
-
-
 module.exports = Select;
 },{"crel":9,"doc-js":11,"gaffa":48,"statham":39}],42:[function(require,module,exports){
 var Gaffa = require('gaffa');
@@ -3237,13 +3269,11 @@ module.exports = Text;
 var Gaffa = require('gaffa'),
     crel = require('crel'),
     doc = require('doc-js'),
-   
     viewType = "textarea",
 	cachedElement;
 
 function Textarea(){}
 Textarea = Gaffa.createSpec(Textarea, Gaffa.View);
-
 Textarea.prototype.type = viewType;
 
 Textarea.prototype.render = function(){
@@ -3268,16 +3298,8 @@ Textarea.prototype.placeholder = new Gaffa.Property(function(view, value){
 });
 
 Textarea.prototype.disabled = new Gaffa.Property(function(view, value){
-    if(value != null && value=='true'){
-        view.renderedElement.disabled=true;
-    }else{
-        view.renderedElement.removeAttribute('disabled');
-    }
+    view.renderedElement[value ? 'setAttribute' : 'removeAttribute']('disabled', value);
 });
-
-
-
-
 
 module.exports = Textarea;
 },{"crel":9,"doc-js":11,"gaffa":48}],45:[function(require,module,exports){
@@ -3397,13 +3419,12 @@ Textbox.prototype.size = new Gaffa.Property(function(view, value){
 });
 
 Textbox.prototype.disabled = new Gaffa.Property(function(view, value){
-    if(value != null && value=='true'){
+    if(value != null && value == 'true'){
         view.formElement.setAttribute('disabled', value);
     }else{
         view.formElement.removeAttribute('disabled');
     }
 });
-
 
 module.exports = Textbox;
 },{"gaffa":48,"gaffa-formelement":45}],47:[function(require,module,exports){
@@ -4544,12 +4565,6 @@ View = createSpec(View, ViewItem);
 View.prototype.bind = function(parent){
     ViewItem.prototype.bind.apply(this, arguments);
 
-    for(var i = 0; i < this.behaviours.length; i++){
-        this.behaviours[i].gaffa = this.gaffa;
-        Behaviour.prototype.bind.call(this.behaviours[i], this);
-        this.behaviours[i].bind(this);
-    }
-
     for(var key in this.actions){
         var actions = this.actions[key],
             off;
@@ -4568,6 +4583,12 @@ View.prototype.bind = function(parent){
     }
 
     this.triggerActions('load');
+
+    for(var i = 0; i < this.behaviours.length; i++){
+        this.behaviours[i].gaffa = this.gaffa;
+        Behaviour.prototype.bind.call(this.behaviours[i], this);
+        this.behaviours[i].bind(this);
+    }
 };
 
 View.prototype.detach = function(){
@@ -4580,16 +4601,19 @@ View.prototype.remove = function(){
 }
 
 View.prototype.debind = function () {
-    this.triggerActions('unload');
     for(var i = 0; i < this.behaviours.length; i++){
         this.behaviours[i].debind();
     }
+
+    this.triggerActions('unload');
+
     while(this._removeHandlers.length){
         this._removeHandlers.pop()();
     }
     for(var key in this.actions){
         this.actions[key].__bound = false;
     }
+
     debindViewItem(this);
 };
 
