@@ -12,6 +12,14 @@ module.exports = function(app){
   SiteIDLabel.text.value = 'Site ID';
   SiteIDTextbox.maxLength.value = 18;
   SiteIDLabel.classes.value = 'fldname';
+<<<<<<< HEAD
+=======
+
+
+
+  SiteIDTextbox.classes.value = 'inp';
+  SiteIDTextbox.required.value = true;
+>>>>>>> 3cd6210fc7273cc9e0ab3edf4644fb5a333030a9
   
   SiteIDTextbox.disabled.binding = '[/fieldsEnabled]';
   
@@ -30,7 +38,11 @@ module.exports = function(app){
   var JobNameTextbox = new views.Textbox();
   JobNameTextbox.value.binding = '[jobName]'
   
+<<<<<<< HEAD
   JobNameTextbox.disabled.binding = '[/fieldsEnabled]';
+=======
+
+>>>>>>> 3cd6210fc7273cc9e0ab3edf4644fb5a333030a9
 
   JobNameTextbox.size.value = 7;
   JobNameLabel.text.value = 'Job Name';
@@ -237,8 +249,11 @@ module.exports = function(app){
 
   var WaterLevelDepthLabel = new views.Label();
   var WaterLevelDepthTextbox = new views.Textbox();
+<<<<<<< HEAD
   WaterLevelDepthTextbox.disabled.binding = '[/fieldsEnabled]';
   
+=======
+>>>>>>> 3cd6210fc7273cc9e0ab3edf4644fb5a333030a9
   WaterLevelDepthTextbox.value.binding = '[waterLevel]'
   WaterLevelDepthTextbox.size.value = 12;
   WaterLevelDepthLabel.text.value = 'Water Level Depth ';
@@ -260,8 +275,11 @@ module.exports = function(app){
 
   var MeasurementPointDescriptionLabel = new views.Label();
   var MeasurementPointDescriptionTextbox = new views.Textbox();
+<<<<<<< HEAD
   MeasurementPointDescriptionTextbox.disabled.binding = '[/fieldsEnabled]';
   
+=======
+>>>>>>> 3cd6210fc7273cc9e0ab3edf4644fb5a333030a9
   MeasurementPointDescriptionTextbox.value.binding = '[measPointDesc]'
   MeasurementPointDescriptionTextbox.size.value = 62;
   MeasurementPointDescriptionLabel.text.value = 'Measurement Point Description';
@@ -280,8 +298,11 @@ module.exports = function(app){
 
   var TotalDepthofWellLabel = new views.Label();
   var TotalDepthofWellTextbox = new views.Textbox();
+<<<<<<< HEAD
   TotalDepthofWellTextbox.disabled.binding = '[/fieldsEnabled]';
   
+=======
+>>>>>>> 3cd6210fc7273cc9e0ab3edf4644fb5a333030a9
   TotalDepthofWellTextbox.value.binding = '[totalDepth]'
   TotalDepthofWellLabel.text.value = 'Total Depth of Well ';
   var TotalDepthofWellPostLabel = new views.Label();
@@ -302,7 +323,10 @@ module.exports = function(app){
   TotalDepthofWellLabelContainer.classes.value = 'field'
   var WellDiameterLabel = new views.Label();
   var WellDiameterTextbox = new views.Textbox();
+<<<<<<< HEAD
   WellDiameterTextbox.disabled.binding = '[/fieldsEnabled]';
+=======
+>>>>>>> 3cd6210fc7273cc9e0ab3edf4644fb5a333030a9
   WellDiameterTextbox.value.binding = '[wellDiam]'
   WellDiameterTextbox.size.value = 17;
   WellDiameterLabel.text.value = 'Well Diameter ';
@@ -976,8 +1000,26 @@ function createControls(){
     //saveRecord.source.binding = '(object "record" (? (filter [] {fields fields.value}) (filter [/ui] {fields fields.table_field}) ) )';
     //// returns a list of all todos that match the current filter.
 //var todosInViewBinding = '(? (= [/filter] "all") [/todos] (? (= [/filter] "completed") (filter [/todos] {todo todo.completed}) (filter [/todos] {todo (! todo.completed)})))';
+<<<<<<< HEAD
 
     saveRecord.source.binding = '[data]';
+=======
+/*
+filters:[
+        {
+            label: "All",
+            filter: 'all'
+        },
+        {
+            label: "Active",
+            filter: 'active'
+        },
+        {
+*/  
+
+
+    saveRecord.source.binding = '[form]';
+>>>>>>> 3cd6210fc7273cc9e0ab3edf4644fb5a333030a9
     saveRecord.target.binding = '[/records]';
     
     //saveRecord.source.binding = '(object "records" (? (filter [] {SITE_STATION} )))';
