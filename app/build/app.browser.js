@@ -1064,8 +1064,8 @@ filters:[
         newRecordButton,
         editRecordButton,
         saveRecordButton,
-        backButton,
-        nextButton,
+        //backButton,
+        //nextButton,
         cancelButton,   
         //searchBox,
         deleteRecordButton

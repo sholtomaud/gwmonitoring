@@ -108,7 +108,7 @@ gulp.task('build2', function() {
 
 gulp.task('watch', function () {
    gulp.watch(['./app/styles/**/*.styl'], ['styles']);
-   gulp.watch(['./app/scripts/**/*.js'], ['build']);
+   gulp.watch(['./app/scripts/**/*.js'], ['build2']);
    //gulp.watch(['./build/pages/aquifer.json'], ['build']);
 });
 
@@ -116,7 +116,7 @@ gulp.task('watch', function () {
 
 gulp.task('connect', function() {
   connect.server({
-    root: 'app',
+    root: 'public',
     livereload: true
   });
 });

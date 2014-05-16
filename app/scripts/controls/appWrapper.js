@@ -21,7 +21,7 @@ module.exports = function(app){
   SiteIDTextbox.required.value = true;
 
   
-  SiteIDTextbox.disabled.binding = '[/fieldsEnabled]';
+  SiteIDTextbox.disabled.binding = '[/fieldsDisabled]';
   
     
   SiteIDTextbox.classes.value = 'inp';
@@ -39,7 +39,7 @@ module.exports = function(app){
   JobNameTextbox.value.binding = '[jobName]'
   
 
-  JobNameTextbox.disabled.binding = '[/fieldsEnabled]';
+  JobNameTextbox.disabled.binding = '[/fieldsDisabled]';
 
 
 
@@ -118,7 +118,7 @@ module.exports = function(app){
   DateLabel.text.value = 'Field Visit Date';
   DateLabel.classes.value = 'fldname';
 
-  DateDate.disabled.binding = '[/fieldsEnabled]';
+  DateDate.disabled.binding = '[/fieldsDisabled]';
   DateDate.classes.value = 'inp';
 
   var DateLabelContainer = new views.Container();
@@ -137,7 +137,7 @@ module.exports = function(app){
   TimeLabel.text.value = 'Time';
   TimeTextbox.maxLength.value = 4;
   
-  TimeTextbox.disabled.binding = '[/fieldsEnabled]';
+  TimeTextbox.disabled.binding = '[/fieldsDisabled]';
   
   var TimePostLabel = new views.Label();
   TimePostLabel.text.value = '(hhmm)';
@@ -168,7 +168,7 @@ module.exports = function(app){
   FreeGasReadingMethanePostLabel.text.value = '(ml/g)';
   FreeGasReadingMethanePostLabel.classes.value = 'postlab';
   
-  FreeGasReadingMethaneTextbox.disabled.binding = '[/fieldsEnabled]';
+  FreeGasReadingMethaneTextbox.disabled.binding = '[/fieldsDisabled]';
   
   FreeGasReadingMethaneLabel.classes.value = 'fldname';
 
@@ -235,7 +235,7 @@ module.exports = function(app){
   WellHeadConditionTextbox.maxLength.value = 60;
   WellHeadConditionLabel.classes.value = 'fldname';
 
-  WellHeadConditionTextbox.disabled.binding = '[/fieldsEnabled]';
+  WellHeadConditionTextbox.disabled.binding = '[/fieldsDisabled]';
   
   WellHeadConditionTextbox.classes.value = 'inp';
 
@@ -250,7 +250,7 @@ module.exports = function(app){
   var WaterLevelDepthLabel = new views.Label();
   var WaterLevelDepthTextbox = new views.Textbox();
 
-  WaterLevelDepthTextbox.disabled.binding = '[/fieldsEnabled]';
+  WaterLevelDepthTextbox.disabled.binding = '[/fieldsDisabled]';
   
 
 
@@ -276,7 +276,7 @@ module.exports = function(app){
   var MeasurementPointDescriptionLabel = new views.Label();
   var MeasurementPointDescriptionTextbox = new views.Textbox();
 
-  MeasurementPointDescriptionTextbox.disabled.binding = '[/fieldsEnabled]';
+  MeasurementPointDescriptionTextbox.disabled.binding = '[/fieldsDisabled]';
   
 
 
@@ -299,7 +299,7 @@ module.exports = function(app){
   var TotalDepthofWellLabel = new views.Label();
   var TotalDepthofWellTextbox = new views.Textbox();
 
-  TotalDepthofWellTextbox.disabled.binding = '[/fieldsEnabled]';
+  TotalDepthofWellTextbox.disabled.binding = '[/fieldsDisabled]';
   
 
 
@@ -324,7 +324,7 @@ module.exports = function(app){
   var WellDiameterLabel = new views.Label();
   var WellDiameterTextbox = new views.Textbox();
 
-  WellDiameterTextbox.disabled.binding = '[/fieldsEnabled]';
+  WellDiameterTextbox.disabled.binding = '[/fieldsDisabled]';
 
 
   WellDiameterTextbox.value.binding = '[wellDiam]'
@@ -413,7 +413,7 @@ module.exports = function(app){
  
   var DepthLabel = new views.Label();
   var DepthTextbox = new views.Textbox();
-  DepthTextbox.disabled.binding = '[/fieldsEnabled]';
+  DepthTextbox.disabled.binding = '[/fieldsDisabled]';
   DepthLabel.text.value = 'Pump Intake Depth';
   DepthLabel.classes.value = 'fldname';
   
@@ -450,7 +450,7 @@ module.exports = function(app){
   FieldParameterMeasurementsLabelContainer.classes.value = 'field'
   var TimeLabel = new views.Label();
   var TimeTextbox = new views.Textbox();
-  TimeTextbox.disabled.binding = '[/fieldsEnabled]';
+  TimeTextbox.disabled.binding = '[/fieldsDisabled]';
   TimeTextbox.value.binding = '[PUMPTEST_TIME]'
   TimeTextbox.size.value = 6;
   TimeLabel.text.value = 'Time';
@@ -473,7 +473,7 @@ module.exports = function(app){
   TimeLabelContainer.classes.value = 'field'
   var VolumePurgedLabel = new views.Label();
   var VolumePurgedTextbox = new views.Textbox();
-  VolumePurgedTextbox.disabled.binding = '[/fieldsEnabled]';
+  VolumePurgedTextbox.disabled.binding = '[/fieldsDisabled]';
   VolumePurgedTextbox.value.binding = '[PUMPTEST_SPARE3]'
   VolumePurgedLabel.text.value = 'Volume Purged';
   var VolumePurgedPostLabel = new views.Label();
@@ -494,7 +494,7 @@ module.exports = function(app){
   VolumePurgedLabelContainer.classes.value = 'field'
   var DOLabel = new views.Label();
   var DOTextbox = new views.Textbox();
-  DOTextbox.disabled.binding = '[/fieldsEnabled]';
+  DOTextbox.disabled.binding = '[/fieldsDisabled]';
   //DOTextbox.value.binding = '[RESULTS_VALUE | RESULTS_VARIABLE = 110]'
   DOTextbox.value.binding = '[dissolvedOx]'
   DOTextbox.size.value = 17;
@@ -518,7 +518,7 @@ module.exports = function(app){
   DOLabelContainer.classes.value = 'field'
   var DOppmLabel = new views.Label();
   var DOppmTextbox = new views.Textbox();
-  DOppmTextbox.disabled.binding = '[/fieldsEnabled]';
+  DOppmTextbox.disabled.binding = '[/fieldsDisabled]';
   DOppmTextbox.value.binding = '[dissolvedOxPPM]'
   DOppmTextbox.size.value = 17;
   DOppmLabel.text.value = 'DO ppm';
@@ -541,7 +541,7 @@ module.exports = function(app){
   DOppmLabelContainer.classes.value = 'field'
   var ElectricalCondutivitiyLabel = new views.Label();
   var ElectricalCondutivitiyTextbox = new views.Textbox();
-  ElectricalCondutivitiyTextbox.disabled.binding = '[/fieldsEnabled]';
+  ElectricalCondutivitiyTextbox.disabled.binding = '[/fieldsDisabled]';
   ElectricalCondutivitiyTextbox.value.binding = '[EC]'
   ElectricalCondutivitiyTextbox.size.value = 17;
   ElectricalCondutivitiyLabel.text.value = 'Electrical Condutivitiy ';
@@ -566,7 +566,7 @@ module.exports = function(app){
   
   var ElectricalCondutivitiy2Label = new views.Label();
   var ElectricalCondutivitiy2Textbox = new views.Textbox();
-  ElectricalCondutivitiy2Textbox.disabled.binding = '[/fieldsEnabled]';
+  ElectricalCondutivitiy2Textbox.disabled.binding = '[/fieldsDisabled]';
   
   ElectricalCondutivitiy2Textbox.value.binding = '[EC2]'
   ElectricalCondutivitiy2Textbox.size.value = 17;
@@ -590,7 +590,7 @@ module.exports = function(app){
   ElectricalCondutivitiy2LabelContainer.classes.value = 'field'
   var pHLabel = new views.Label();
   var pHTextbox = new views.Textbox();
-  pHTextbox.disabled.binding = '[/fieldsEnabled]';
+  pHTextbox.disabled.binding = '[/fieldsDisabled]';
   pHTextbox.value.binding = '[pH]'
   pHTextbox.size.value = 17;
   pHLabel.text.value = 'pH';
@@ -608,7 +608,7 @@ module.exports = function(app){
   pHLabelContainer.classes.value = 'field'
   var RedOxLabel = new views.Label();
   var RedOxTextbox = new views.Textbox();
-  RedOxTextbox.disabled.binding = '[/fieldsEnabled]';
+  RedOxTextbox.disabled.binding = '[/fieldsDisabled]';
   RedOxTextbox.value.binding = '[redox]'
   RedOxTextbox.size.value = 17;
   RedOxLabel.text.value = 'RedOx ';
@@ -631,7 +631,7 @@ module.exports = function(app){
   RedOxLabelContainer.classes.value = 'field'
   var TempLabel = new views.Label();
   var TempTextbox = new views.Textbox();
-  TempTextbox.disabled.binding = '[/fieldsEnabled]';
+  TempTextbox.disabled.binding = '[/fieldsDisabled]';
   TempTextbox.value.binding = '[temp]'
   TempTextbox.size.value = 17;
   TempLabel.text.value = 'Temp';
@@ -654,7 +654,7 @@ module.exports = function(app){
   TempLabelContainer.classes.value = 'field'
   var TurbidityLabel = new views.Label();
   var TurbidityTextbox = new views.Textbox();
-  TurbidityTextbox.disabled.binding = '[/fieldsEnabled]';
+  TurbidityTextbox.disabled.binding = '[/fieldsDisabled]';
   
   TurbidityTextbox.value.binding = '[turb]'
   TurbidityTextbox.size.value = 17;
@@ -779,7 +779,7 @@ module.exports = function(app){
   SamplingMethodLabelContainer.classes.value = 'field'
   var BOTTLENUMBERLabel = new views.Label();
   var BOTTLENUMBERTextbox = new views.Textbox();
-  BOTTLENUMBERTextbox.disabled.binding = '[/fieldsEnabled]';
+  BOTTLENUMBERTextbox.disabled.binding = '[/fieldsDisabled]';
   BOTTLENUMBERTextbox.value.binding = '[bottle]';
   BOTTLENUMBERTextbox.size.value = 22;
   BOTTLENUMBERLabel.text.value = 'Bottle Number';
@@ -797,14 +797,14 @@ module.exports = function(app){
   BOTTLENUMBERLabelContainer.classes.value = 'field';
   var SAMPLENUMBERLabel = new views.Label();
   var SAMPLENUMBERTextbox = new views.Textbox();
-  SAMPLENUMBERTextbox.disabled.binding = '[/fieldsEnabled]';
+  SAMPLENUMBERTextbox.disabled.binding = '[/fieldsDisabled]';
   SAMPLENUMBERTextbox.value.binding = '[sampnum]';
   SAMPLENUMBERTextbox.size.value = 32;
   SAMPLENUMBERLabel.text.value = 'Sample Number';
   SAMPLENUMBERTextbox.maxLength.value = 30;
   SAMPLENUMBERLabel.classes.value = 'fldname';
 
-  SAMPLENUMBERTextbox.disabled.binding = '[/fieldsEnabled]';
+  SAMPLENUMBERTextbox.disabled.binding = '[/fieldsDisabled]';
   SAMPLENUMBERTextbox.classes.value = 'inp';
 
   var SAMPLENUMBERLabelContainer = new views.Container();
@@ -835,7 +835,7 @@ module.exports = function(app){
   SampleTypeLabel.classes.value = 'fldname';
   
   var SampleTypeSelect = new views.Select();
-  SampleTypeSelect.disabled.binding = '[/fieldsEnabled]';
+  SampleTypeSelect.disabled.binding = '[/fieldsDisabled]';
   
   SampleTypeSelect.value.binding = '[samptype]';
   SampleTypeSelect.options.value = ['Primary','Dupe1','Dupe3','Trip1','Trip2','Trip3','Rinsate1','Rinsate2','Rinsate3','Trip Blank','Trip Spike'];
@@ -851,7 +851,7 @@ module.exports = function(app){
     
   var SampleCommentLabel = new views.Label();
   var SampleCommentTextarea = new views.Textarea();
-  SampleCommentTextarea.disabled.binding = '[/fieldsEnabled]';
+  SampleCommentTextarea.disabled.binding = '[/fieldsDisabled]';
   SampleCommentTextarea.value.binding = '[samples_commnt]';
   SampleCommentLabel.text.value = 'Sample Comment';
   SampleCommentLabel.classes.value = 'fldname';
@@ -866,10 +866,8 @@ module.exports = function(app){
   
   SampleCommentLabelContainer.classes.value = 'field';
   
-   //var formTemplate = new views.Container();
-   var formTemplate = new views.Form();
-    //formTemplate.classes.value = 'form';
-    formTemplate.views.content.add([
+   var formFields = new views.Form();
+    formFields.views.content.add([
       SiteIDLabelContainer,
       JobNameLabelContainer,
       //BasinLabelContainer,
@@ -914,15 +912,13 @@ module.exports = function(app){
       SampleTypeLabelContainer,
       SampleCommentLabelContainer
     ]);
-    
-    formTemplate.path = '[/data]';
       
     var finishEditing = new actions.Push();
     finishEditing.source.value = false;
     finishEditing.target.binding = '[/data]';
 
-    formTemplate.actions.submit = [finishEditing];
-    return formTemplate;
+    formFields.actions.submit = [finishEditing];
+    return formFields;
 }
 
 function formActions(){    
@@ -976,7 +972,7 @@ function createControls(){
       saveRecord = new actions.Push(),
       saveExport = new actions.Push(),
       addRecordIfNotEmpty = new actions.Conditional(),
-      clearNewRecord = new actions.Remove();
+      deleteRecord = new actions.Remove();
 
 
     backButton.text.value = '<- Back';
@@ -989,10 +985,14 @@ function createControls(){
     deleteRecordButton.text.value = 'Delete';
 
     enableForm.source.value = 'false' ;
-    enableForm.target.binding = '[/fieldsEnabled]';
+    enableForm.target.binding = '[/fieldsDisabled]';
 
     disableForm.source.value = 'true' ;
-    disableForm.target.binding = '[/fieldsEnabled]';
+    disableForm.target.binding = '[/fieldsDisabled]';
+
+    deleteRecordButton.actions.click = [deleteRecord];
+
+    deleteRecord.target.binding = '[]';
 
     editRecordButton.actions.click = [enableForm];
     newRecordButton.actions.click = [enableForm];
@@ -1018,9 +1018,7 @@ filters:[
 */  
 
 
-    saveRecord.source.binding = '[form]';
-
-    saveRecord.target.binding = '[/records]';
+    saveRecord.target.binding = '[/data]';
     
     //saveRecord.source.binding = '(object "records" (? (filter [] {SITE_STATION} )))';
     //saveExport.target.binding =  '[/export]';
@@ -1032,11 +1030,11 @@ filters:[
         newRecordButton,
         editRecordButton,
         saveRecordButton,
-        //backButton,
-        //nextButton,
-        cancelButton
+        backButton,
+        nextButton,
+        cancelButton,   
         //searchBox,
-        //deleteRecordButton
+        deleteRecordButton
     ]);
 
     controlsTemplate.classes.value = 'controls';
@@ -1058,19 +1056,14 @@ function createAppBehaviours(){
         persistData = new actions.BrowserStorage(),
         disable = new actions.Set(),
         updateDisabled = new actions.Set(),
-        setActiveRecord = new actions.Set(),
-        ttoggleDisabled = new behaviours.ModelChange();
+        setActiveRecord = new actions.Set();
 
-    updateDisabled.source.binding = '[/fieldsEnabled]';
-    updateDisabled.target.binding = '[]';
-    
-    ttoggleDisabled.watch.binding = '[/fieldsEnabled]';
-    ttoggleDisabled.actions.change = [updateDisabled];
+    var activeRecord = 0;
 
     disable.source.value = 'true';
-    disable.target.binding = '[/fieldsEnabled]';
+    disable.target.binding = '[/fieldsDisabled]';
 
-    retieveLocalData.source.value = 'data';
+    retieveLocalData.source.value = 'localData';
     retieveLocalData.method.value = 'get';
     retieveLocalData.target.binding = '[/data]';
 
@@ -1078,9 +1071,9 @@ function createAppBehaviours(){
 
     persistData.source.binding = '[/data]';
     persistData.method.value = 'set';
-    persistData.target.value = 'data';
+    persistData.target.value = 'localData';
 
-    persistDataOnChange.watch.binding = '[/data]';
+    persistDataOnChange.watch.binding = '[/localData]';
     persistDataOnChange.actions.change = [persistData];
 
     return [
